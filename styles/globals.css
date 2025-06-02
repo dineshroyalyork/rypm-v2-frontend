@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+/* 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 245, 247, 250;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* For the play button in bottom navigation */
+.play-button-container {
+  position: relative;
+  top: -15px;
+}
+
+ html{
+  scroll-behavior:smooth;
+ }
+
+
+@keyframes slide-from-left {
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes slide-from-right {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0.9;
+  }
+}
+
+.animate-slide-from-left {
+  animation: slide-from-left 0.3s ease-out forwards;
+}
+
+.animate-slide-from-right {
+  animation: slide-from-right 0.3s ease-out forwards;
+}
+
+/* Hide scrollbar completely */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE, Edge */
+  scrollbar-width: none;     /* Firefox */
+}
