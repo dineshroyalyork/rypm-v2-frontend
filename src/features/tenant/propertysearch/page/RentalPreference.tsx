@@ -19,7 +19,7 @@ const RentalPreference: React.FC = () => {
   const [propertyType, setPropertyType] = React.useState<string>("");
 
   const handleBackClick = () => {
-    router.push(`/tenant/PropertySearch`);
+    router.back();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,9 +52,21 @@ const RentalPreference: React.FC = () => {
       <span
         key={opt}
         onClick={() => onSelect(opt)}
-        className={`cursor-pointer px-2 py-1 rounded-md text-xs
-          ${selected === opt ? "bg-[#EAF7FF] border border-[#E4F4FF] text-[#001D3D]" : "text-[#001D3D]"}
+        className={`cursor-pointer text-xs text-center flex items-center justify-center transition-all duration-200
+          ${selected === opt 
+            ? "text-[#001D3D] border-[1.5px] border-[#001D3D]" 
+            : "text-[#001D3D] border border-transparent"
+          }
         `}
+        style={{
+          width: '11vw', 
+          height: '9vw', 
+          borderRadius: '4px',
+          minWidth: '43px', 
+          minHeight: '35px',
+          maxWidth: '60px', 
+          maxHeight: '45px', 
+        }}
       >
         {opt}
       </span>
@@ -81,9 +93,9 @@ const RentalPreference: React.FC = () => {
               <div className="flex flex-row items-center justify-between">
                 <Heading text="Price" className="text-sm" />
                 <div className="flex justify-between items-center gap-2">
-                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F1FCFF] rounded-md">{`$${price[0]}`}</span>
+                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F1FCFF] rounded-md">{`${price[0]}`}</span>
                   <span className="text-[#001D3D] text-xs">to</span>
-                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F1FCFF] rounded-md">{`$${price[1]}`}</span>
+                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F1FCFF] rounded-md">{`${price[1]}`}</span>
                 </div>
               </div>
               <Box sx={{ px: 1 }}>
@@ -102,8 +114,8 @@ const RentalPreference: React.FC = () => {
             {/* Bedrooms */}
             <div className="space-y-1">
               <Heading text="Bedrooms" className="text-sm" />
-              <div className="border border-[#F1FCFF] rounded-md px-2 py-1.5">
-                <div className="flex flex-wrap gap-1">
+              <div className="border border-[#F3F4F6] rounded-md px-2">
+                <div className="flex justify-between items-center gap-1">
                   {renderOptions(["Studio+", "1+", "2+", "3+", "4+", "5+"], bedroom, setBedroom)}
                 </div>
               </div>
@@ -112,9 +124,9 @@ const RentalPreference: React.FC = () => {
             {/* Bathrooms */}
             <div className="space-y-1">
               <Heading text="Bathrooms" className="text-sm" />
-              <div className="border border-[#F1FCFF] rounded-md px-2 py-1.5">
-                <div className="flex flex-wrap gap-1">
-                  {renderOptions(["Studio+", "1+", "2+", "3+", "4+", "5+"], bathroom, setBathroom)}
+              <div className="border border-[#F3F4F6] rounded-md px-2">
+                <div className="flex justify-between items-center gap-1">
+                  {renderOptions(["All+", "1+", "2+", "3+", "4+", "5+"], bathroom, setBathroom)}
                 </div>
               </div>
             </div>
@@ -122,9 +134,9 @@ const RentalPreference: React.FC = () => {
             {/* Parking */}
             <div className="space-y-1">
               <Heading text="Parking" className="text-sm" />
-              <div className="border border-[#F1FCFF] rounded-md px-2 py-1.5">
-                <div className="flex flex-wrap gap-1">
-                  {renderOptions(["Studio+", "1+", "2+", "3+", "4+", "5+"], parking, setParking)}
+              <div className="border border-[#F3F4F6] rounded-md px-2">
+                <div className="flex justify-between items-center gap-1">
+                  {renderOptions(["All+", "1+", "2+", "3+", "4+", "5+"], parking, setParking)}
                 </div>
               </div>
             </div>

@@ -287,112 +287,148 @@
 
 
 
+// 'use client';
+// import React, { useRef, useEffect, useState } from 'react';
+
+// interface PropertyMediaProps {
+//   videoUrl: string;
+//   onMediaChange?: (isVideo: boolean) => void;
+// }
+
+// const PropertyMedia: React.FC<PropertyMediaProps> = ({
+//   videoUrl,
+//   onMediaChange,
+// }) => {
+//   const videoRef = useRef<HTMLVideoElement>(null);
+//   const containerRef = useRef<HTMLDivElement>(null);
+//   const [isVisible, setIsVisible] = useState(false);
+//   const [videoLoaded, setVideoLoaded] = useState(false);
+//   const [isPlaying, setIsPlaying] = useState(false);
+
+//   // Set up IntersectionObserver to detect when video is visible
+//   useEffect(() => {
+//     if (!containerRef.current) return;
+
+//     // Observer for loading the video (more lenient)
+//     const loadObserver = new IntersectionObserver((entries) => {
+//       if (entries[0].isIntersecting && !videoLoaded) {
+//         // Start loading the video when it's about to be visible
+//         if (videoRef.current && !videoRef.current.src) {
+//           videoRef.current.src = videoUrl;
+//           setVideoLoaded(true);
+//         }
+//       }
+//     }, {
+//       root: null,
+//       rootMargin: '200px', // Preload when within 200px of viewport
+//       threshold: 0.1 // Start loading when 10% visible
+//     });
+
+//     // Observer for playing the video (stricter - 70% visibility required)
+//     const playObserver = new IntersectionObserver((entries) => {
+//       setIsVisible(entries[0].isIntersecting);
+//     }, { 
+//       threshold: 0.7 // Play only when 50% visible as per requirement
+//     });
+
+//     loadObserver.observe(containerRef.current);
+//     playObserver.observe(containerRef.current);
+
+//     return () => {
+//       if (containerRef.current) {
+//         loadObserver.unobserve(containerRef.current);
+//         playObserver.unobserve(containerRef.current);
+//       }
+//     };
+//   }, [videoUrl, videoLoaded]);
+
+//   // Play/pause video based on visibility
+//   useEffect(() => {
+//     if (!videoRef.current || !videoLoaded) return;
+
+//     videoRef.current.muted = true;
+//     videoRef.current.playsInline = true;
+//     videoRef.current.loop = true;
+    
+//     if (isVisible) {
+//       // Video is visible (70% threshold met), play it
+//       const playPromise = videoRef.current.play();
+      
+//       if (playPromise !== undefined) {
+//         playPromise
+//           .then(() => {
+//             setIsPlaying(true);
+//             if (onMediaChange) onMediaChange(true);
+//           })
+//           .catch(error => {
+//             console.error("Video autoplay was prevented:", error);
+//             setIsPlaying(false);
+//           });
+//       }
+//     } else if (isPlaying) {
+//       // Video is not visible but was playing, pause it
+//       videoRef.current.pause();
+//       setIsPlaying(false);
+//     }
+//   }, [isVisible, videoLoaded, onMediaChange, isPlaying]);
+
+//   return (
+//     <div ref={containerRef} className="relative w-full h-full overflow-hidden">
+//       {/* Placeholder/skeleton while video is loading */}
+//       {!videoLoaded && (
+//         <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+//       )}
+      
+//       <video
+//         ref={videoRef}
+//         muted
+//         playsInline
+//         loop
+//         style={{ 
+//           width: '100%', 
+//           height: '100%', 
+//           objectFit: 'cover',
+//           opacity: videoLoaded ? 1 : 0, // Hide video until loaded
+//           transition: 'opacity 0.3s ease'
+//         }}
+//         preload="metadata"
+//         onLoadedData={() => setVideoLoaded(true)}
+//       />
+//     </div>
+//   );
+// };
+
+// export default PropertyMedia;
+
+
+
+
+
 'use client';
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
+import Image from 'next/image';
 
 interface PropertyMediaProps {
-  videoUrl: string;
+  imageUrl: string;
   onMediaChange?: (isVideo: boolean) => void;
 }
 
 const PropertyMedia: React.FC<PropertyMediaProps> = ({
-  videoUrl,
+  imageUrl,
   onMediaChange,
 }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  // Set up IntersectionObserver to detect when video is visible
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    // Observer for loading the video (more lenient)
-    const loadObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !videoLoaded) {
-        // Start loading the video when it's about to be visible
-        if (videoRef.current && !videoRef.current.src) {
-          videoRef.current.src = videoUrl;
-          setVideoLoaded(true);
-        }
-      }
-    }, {
-      root: null,
-      rootMargin: '200px', // Preload when within 200px of viewport
-      threshold: 0.1 // Start loading when 10% visible
-    });
-
-    // Observer for playing the video (stricter - 70% visibility required)
-    const playObserver = new IntersectionObserver((entries) => {
-      setIsVisible(entries[0].isIntersecting);
-    }, { 
-      threshold: 0.7 // Play only when 50% visible as per requirement
-    });
-
-    loadObserver.observe(containerRef.current);
-    playObserver.observe(containerRef.current);
-
-    return () => {
-      if (containerRef.current) {
-        loadObserver.unobserve(containerRef.current);
-        playObserver.unobserve(containerRef.current);
-      }
-    };
-  }, [videoUrl, videoLoaded]);
-
-  // Play/pause video based on visibility
-  useEffect(() => {
-    if (!videoRef.current || !videoLoaded) return;
-
-    videoRef.current.muted = true;
-    videoRef.current.playsInline = true;
-    videoRef.current.loop = true;
-    
-    if (isVisible) {
-      // Video is visible (70% threshold met), play it
-      const playPromise = videoRef.current.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-            if (onMediaChange) onMediaChange(true);
-          })
-          .catch(error => {
-            console.error("Video autoplay was prevented:", error);
-            setIsPlaying(false);
-          });
-      }
-    } else if (isPlaying) {
-      // Video is not visible but was playing, pause it
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  }, [isVisible, videoLoaded, onMediaChange, isPlaying]);
+  React.useEffect(() => {
+    if (onMediaChange) onMediaChange(false);
+  }, [onMediaChange]);
 
   return (
-    <div ref={containerRef} className="relative w-full h-full overflow-hidden">
-      {/* Placeholder/skeleton while video is loading */}
-      {!videoLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
-      
-      <video
-        ref={videoRef}
-        muted
-        playsInline
-        loop
-        style={{ 
-          width: '100%', 
-          height: '100%', 
-          objectFit: 'cover',
-          opacity: videoLoaded ? 1 : 0, // Hide video until loaded
-          transition: 'opacity 0.3s ease'
-        }}
-        preload="metadata"
-        onLoadedData={() => setVideoLoaded(true)}
+    <div className="relative w-full h-full overflow-hidden">
+      <Image
+        src={imageUrl}
+        alt="Property image"
+        fill
+        style={{ objectFit: 'cover' }}
+        priority
       />
     </div>
   );

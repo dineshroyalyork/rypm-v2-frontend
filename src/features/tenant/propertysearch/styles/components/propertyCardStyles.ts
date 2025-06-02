@@ -76,12 +76,12 @@ const CarouselIndicatorsContainer = styled(Box)(({ theme }) => ({
   gap: theme.spacing(1)
 }));
 
-const MediaCountContainer = styled(Box)(({ theme }) => ({
+const MediaCountContainer = styled(Box)(() => ({
   position: 'absolute', 
   bottom: 16, 
   right: 16, 
   display: 'flex',
-  gap: '10px',
+  gap: '5px',
   width: '84px',
   height: '27px',
   backgroundColor: 'rgba(32, 54, 77, 0.30)',
@@ -153,12 +153,13 @@ const CountText = styled(Typography)(({ theme }) => ({
 const MainInfoContainer=styled(Box)(({ theme }) => ({
   backdropFilter: 'blur(3.55px)',
   background: 'rgba(32, 54, 77, 0.30)',
+  paddingTop:'5px',
 }));
 
 const InfoBox1 = styled(Box)(({ theme }) => ({
-  display: 'flex', 
-  justifyContent: 'space-between', 
-  alignItems: 'center', 
+  // display: 'flex', 
+  // justifyContent: 'space-between', 
+  // alignItems: 'center', 
   height: '30px',
   padding: '0 16px',
   width: '100%',
@@ -176,7 +177,7 @@ const InfoBox2 = styled(Box)(({ theme }) => ({
 
 const AmenitiesContainer = styled(Box)(({ theme }) => ({
   display: 'flex', 
-  gap: theme.spacing(2)
+  gap: theme.spacing(1)
 }));
 
 const AmenityItem = styled(Box)(({ theme }) => ({

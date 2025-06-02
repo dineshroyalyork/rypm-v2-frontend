@@ -173,7 +173,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
     return "Click to start voice search";
   };
 
-  const showSearchButton = value.length > 0;
+  const showSearchButton = false;
 
   const handleInputClick = (event: React.MouseEvent) => {
   const target = event.target as HTMLElement;

@@ -26,7 +26,8 @@ interface PropertyCardProps extends PropertyData {
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
   id,
-  videoUrl,
+  //videoUrl,
+  imageUrl,
   price,
   bedCount,
   bathCount,
@@ -68,7 +69,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
       <MediaContainer isDetailView={false} elevation={1}>
         {/* Use the optimized PropertyMedia component */}
         <PropertyMedia 
-          videoUrl={videoUrl} 
+          imageUrl={imageUrl} 
           onMediaChange={handleMediaChange}
         />
         

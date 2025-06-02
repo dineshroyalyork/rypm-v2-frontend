@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 export interface PropertyData {
   id: string;
-  videoUrl: string;
+  imageUrl: string;
   images: string[];
   price: string;
   bedCount: number;
@@ -25,7 +25,8 @@ export interface PropertyData {
 export const mockProperties: PropertyData[] = [
   {
     id: '1',
-    videoUrl: '/videos/showings-1.mp4',
+    ////videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/modern house.png',
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -48,7 +49,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '2',
-    videoUrl: '/videos/showings-2.mp4',
+    //videoUrl: '/videos/showings-2.mp4',
+imageUrl:'/images/property2.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -71,7 +74,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '3',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property3.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -94,7 +99,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '4',
-    videoUrl: '/videos/showings-2.mp4',
+    //videoUrl: '/videos/showings-2.mp4',
+imageUrl:'/images/property4.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -117,7 +124,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '5',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property5.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -140,7 +149,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '6',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property6.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -163,7 +174,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '7',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property7.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -186,7 +199,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '8',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property2.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -209,7 +224,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '9',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property3.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -232,7 +249,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '10',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property4.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -255,7 +274,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '11',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property5.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -278,7 +299,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '12',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property2.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -301,7 +324,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '13',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property6.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -324,7 +349,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '14',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property7.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -347,7 +374,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '15',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property3.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -370,7 +399,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '16',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property4.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -393,7 +424,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '17',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property6.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -416,7 +449,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '18',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property7.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -439,7 +474,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '19',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property2.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -462,7 +499,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '20',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property3.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -485,7 +524,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '21',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property4.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -508,7 +549,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '22',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property5.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -531,7 +574,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '23',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property6.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -554,7 +599,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '24',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property7.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
@@ -577,7 +624,9 @@ export const mockProperties: PropertyData[] = [
   },
   {
     id: '25',
-    videoUrl: '/videos/showings-1.mp4',
+    //videoUrl: '/videos/showings-1.mp4',
+imageUrl:'/images/property7.png',
+
     images: [
       '/images/toronto.png',
       '/images/Panama.png',

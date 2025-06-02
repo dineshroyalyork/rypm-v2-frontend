@@ -1,4 +1,4 @@
-import { Opacity } from '@mui/icons-material';
+// import { Opacity } from '@mui/icons-material';
 import React from 'react';
 
 interface BackIconProps {
@@ -7,14 +7,16 @@ interface BackIconProps {
   className?: string;
   color?: string;
   opacity?: number;
+  backgroundColor?: string;
 }
 
 const BackIcon = ({ 
   width = 30, 
   height = 30, 
   className = '',
-  color="white",
-  opacity = 0.3
+  color="#001D3D",
+  opacity = 0.3,
+  backgroundColor = "#F6F7F8"
 }: BackIconProps) => {
   return (
     <svg 
@@ -40,7 +42,7 @@ const BackIcon = ({
     width="30" 
     height="30" 
     rx="15" 
-    fill="#001D3D" 
+    fill={backgroundColor} 
     fillOpacity={opacity} 
   />
   <path 

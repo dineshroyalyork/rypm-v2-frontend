@@ -13,8 +13,9 @@ const PhotoOfProperty: React.FC<PhotoOfPropertyProps> = ({ id }) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push(`/tenant/properties/${id}/photos-videos`);
-  };
+// router.push(`/tenant/properties/${id}/photos-videos`);Add commentMore actions
+    router.back();
+    };
 
   return (
       <div className="bg-black h-[100vh]"> 

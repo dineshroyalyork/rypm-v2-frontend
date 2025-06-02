@@ -29,8 +29,9 @@ const PhotosAndVideos: React.FC<PhotoVideosProps> = ({ id }) => {
     router.push(`/tenant/properties/${id}/video`);
   }
   const handleNavigatePhoto = () => {
-    router.push(`/tenant/properties/${id}/photo`);
-  }
+// router.push(`/tenant/properties/${id}`);Add commentMore actions
+    router.back();
+    }
  
   return (
     <>
