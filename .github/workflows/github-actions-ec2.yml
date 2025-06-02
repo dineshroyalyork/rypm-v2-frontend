@@ -16,11 +16,12 @@ jobs:
 
       - name: Deploy files via SSH
         uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          TARGET: ${{ secrets.TARGET_DIR }}
+        with:
+          remote_host: ${{ secrets.HOST_DNS }}
+          remote_user: ${{ secrets.USERNAME }}
+          private_key: ${{ secrets.EC2_SSH_KEY }}
+          target: ${{ secrets.TARGET_DIR }}
+          source: "."   # adjust if needed
 
       - name: Execute remote commands (PM2 Restart)
         uses: appleboy/ssh-action@master
