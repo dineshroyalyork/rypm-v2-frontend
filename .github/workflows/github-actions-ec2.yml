@@ -21,7 +21,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-          SOURCE: "." # optional, defaults to "."
+          SOURCE: "."
           REMOTE_PORT: "22"
           SSH_CMD_ARGS: "-o StrictHostKeyChecking=no"
 
