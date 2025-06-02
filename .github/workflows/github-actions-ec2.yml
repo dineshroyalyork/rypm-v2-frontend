@@ -7,9 +7,11 @@ on:
 
 jobs:
   deploy:
+    name: Deploy to EC2 on main branch push
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout the files
+      - name: Checkout the code
         uses: actions/checkout@v2
 
       - name: Deploy files via SSH
@@ -19,9 +21,9 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST_DNS }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           TARGET: ${{ secrets.TARGET_DIR }}
-          SOURCE: "."
+          SOURCE: "."  # Send current folder contents
 
-      - name: Execute remote commands (PM2 Restart)
+      - name: Install dependencies, build, and restart PM2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST_DNS }}
