@@ -7,9 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on main branch push
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
@@ -17,11 +15,11 @@ jobs:
       - name: Deploy files via SSH
         uses: easingthemes/ssh-deploy@main
         with:
-          remote_host: ${{ secrets.HOST_DNS }}
-          remote_user: ${{ secrets.USERNAME }}
-          private_key: ${{ secrets.EC2_SSH_KEY }}
-          target: ${{ secrets.TARGET_DIR }}
-          source: "."   # adjust if needed
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+          SOURCE: "."
 
       - name: Execute remote commands (PM2 Restart)
         uses: appleboy/ssh-action@master
