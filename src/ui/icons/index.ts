@@ -152,3 +152,4 @@ export {default as VideoPlayIcon } from './VideoPlayIcon';
 export {default as HeartFillIcon} from './HeartFillIcon';
 export {default as RentalPreferencePeopleIcon} from './RentalPreferencePeopleIcon';
 export {default as ListIcon} from './ListIcon';
+export { default as ProfileIcon } from './ProfileIcon';

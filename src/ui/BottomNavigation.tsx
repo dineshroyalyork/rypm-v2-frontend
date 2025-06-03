@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveMainTab } from '@/features/tenant/tenantprofile/slices/tenantSlice';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { HomeIcon, ChatsIcon, PercentageIcon } from './icons';
+import { HomeIcon, ChatsIcon, PercentageIcon,ProfileIcon } from './icons';
 import { RootState } from '@/store/rootReducer';
 import LogoIcon from './icons/Logo';
 
@@ -191,38 +191,33 @@ const BottomNavigation = () => {
 
         {/* Profile Tab */}
         <div className='flex flex-col items-center justify-center text-gray-600 flex-1 h-full'>
-          <button 
-            className="flex justify-center items-center relative w-[46px] h-[46px]"
-            style={{
-              transform: activeMainTab === 'Profile' ? 'translateY(-18px)' : 'translateY(0px)',
-              transition: 'transform 0.6s ease'
-            }}
-            onClick={() => handleTabChange('Profile')}
-            aria-label="Profile"
-          >
-            {activeMainTab === 'Profile' && (
-              <div className={`absolute -z-10 w-[46px] h-[46px] bg-[#001D3D] rounded-full opacity-90 transition-all duration-600 ${
-                direction === 'left' ? 'animate-slide-from-right' : direction === 'right' ? 'animate-slide-from-left' : ''
-              }`}></div>
-            )}
-            <div className={`w-[30px] h-[30px] rounded-full overflow-hidden border-2 ${
-              activeMainTab === 'Profile' ? 'border-white' : 'border-gray-300'
-            }`}>
-              <Image 
-                src="/images/testimonial-client-01 1.png" 
-                alt="Profile" 
-                width={30} 
-                height={30} 
-                className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-          </button>
-          {activeMainTab === 'Profile' && (
-            <span className="text-[10px] mt-1 text-center font-bold leading-[160%] capitalize text-white absolute bottom-1">
-              Profile
-            </span>
-          )}
-        </div>
+  <button 
+    className="flex justify-center items-center relative w-[46px] h-[46px]"
+    style={{
+      transform: activeMainTab === 'Profile' ? 'translateY(-18px)' : 'translateY(0px)',
+      transition: 'transform 0.6s ease'
+    }}
+    onClick={() => handleTabChange('Profile')}
+    aria-label="Profile"
+  >
+    {activeMainTab === 'Profile' && (
+      <div className={`absolute -z-10 w-[46px] h-[46px] bg-[#001D3D] rounded-full opacity-90 transition-all duration-600 ${
+        direction === 'left' ? 'animate-slide-from-right' : direction === 'right' ? 'animate-slide-from-left' : ''
+      }`}></div>
+    )}
+    <ProfileIcon 
+      height={24} 
+      width={24} 
+      className={activeMainTab === 'Profile' ? 'text-white' : 'text-gray-400'} 
+    />
+  </button>
+  {activeMainTab === 'Profile' && (
+    <span className="text-[10px] mt-1 text-center font-bold leading-[160%] capitalize text-white absolute bottom-1">
+      Profile
+    </span>
+  )}
+</div>
+
       </div>
     </div>
   );
