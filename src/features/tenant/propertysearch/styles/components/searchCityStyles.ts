@@ -103,7 +103,7 @@ export const SearchButtonAdornment = styled(InputAdornment)({
 });
 
 export const MapButtonAdornment = styled(InputAdornment)({
-  backgroundColor: '#F9FAFB',
+  backgroundColor: '#F6F7F8',
   borderRadius: '24px',
   display: 'flex',
   justifyContent: 'end',

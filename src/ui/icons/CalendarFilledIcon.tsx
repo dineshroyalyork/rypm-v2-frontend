@@ -28,8 +28,8 @@ const CalendarFilledIcon = ({
         width="28.5"
         height="28.5"
         rx="14.25"
-        fill="#F9FAFB"
-        stroke="#F9FAFB"
+        fill="#F6F7F8"
+        stroke="#F3F4F6"
         strokeWidth="1.5"
       />
       <path
