@@ -95,14 +95,15 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         <MainInfoContainer className="absolute bottom-0 left-0 right-0 flex flex-col text-[#FFF]">
           <InfoBox1>
             <Typography variant="subtitle1" fontWeight="bold" fontSize="18px">
-              {price}
+              <span style={{ marginRight: '2px' }}>$</span>
+              {price.replace('$ ', '').replace('$', '')}
             </Typography>
           </InfoBox1>
           
           <InfoBox2>
             <LocationContainer>
               <LocationIcon width={11} height={16} className="mr-1 flex-shrink-0" />
-              <Typography variant="body2" color="white">
+              <Typography variant="body2" color="white" fontSize="14px">
                 {city}, {country}
               </Typography>
             </LocationContainer>

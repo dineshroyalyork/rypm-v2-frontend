@@ -75,7 +75,7 @@ imageUrl:'/images/property2.png',
   {
     id: '3',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property3.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -100,7 +100,7 @@ imageUrl:'/images/property3.png',
   {
     id: '4',
     //videoUrl: '/videos/showings-2.mp4',
-imageUrl:'/images/property4.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -125,7 +125,7 @@ imageUrl:'/images/property4.png',
   {
     id: '5',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property5.png',
+imageUrl:'/images/property2.png',
 
     images: [
       '/images/toronto.png',
@@ -150,7 +150,7 @@ imageUrl:'/images/property5.png',
   {
     id: '6',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property6.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -175,7 +175,7 @@ imageUrl:'/images/property6.png',
   {
     id: '7',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property7.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -225,7 +225,7 @@ imageUrl:'/images/property2.png',
   {
     id: '9',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property3.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -250,7 +250,7 @@ imageUrl:'/images/property3.png',
   {
     id: '10',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property4.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -275,7 +275,7 @@ imageUrl:'/images/property4.png',
   {
     id: '11',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property5.png',
+imageUrl:'/images/property2.png',
 
     images: [
       '/images/toronto.png',
@@ -300,7 +300,7 @@ imageUrl:'/images/property5.png',
   {
     id: '12',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property2.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -325,7 +325,7 @@ imageUrl:'/images/property2.png',
   {
     id: '13',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property6.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -350,7 +350,7 @@ imageUrl:'/images/property6.png',
   {
     id: '14',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property7.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -375,7 +375,7 @@ imageUrl:'/images/property7.png',
   {
     id: '15',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property3.png',
+imageUrl:'/images/property2.png',
 
     images: [
       '/images/toronto.png',
@@ -400,7 +400,7 @@ imageUrl:'/images/property3.png',
   {
     id: '16',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property4.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -425,7 +425,7 @@ imageUrl:'/images/property4.png',
   {
     id: '17',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property6.png',
+imageUrl:'/images/property2.png',
 
     images: [
       '/images/toronto.png',
@@ -450,7 +450,7 @@ imageUrl:'/images/property6.png',
   {
     id: '18',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property7.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -475,7 +475,7 @@ imageUrl:'/images/property7.png',
   {
     id: '19',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property2.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -500,7 +500,7 @@ imageUrl:'/images/property2.png',
   {
     id: '20',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property3.png',
+imageUrl:'/images/property2.png',
 
     images: [
       '/images/toronto.png',
@@ -525,14 +525,14 @@ imageUrl:'/images/property3.png',
   {
     id: '21',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property4.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
       '/images/Panama.png',
       '/images/new york, USA.png',
     ],
-    price: '$2,850',
+    price: '$ 2,850',
     bedCount: 3,
     bathCount: 2,
     photoCount: 15,
@@ -550,7 +550,7 @@ imageUrl:'/images/property4.png',
   {
     id: '22',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property5.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',
@@ -575,7 +575,7 @@ imageUrl:'/images/property5.png',
   {
     id: '23',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property6.png',
+imageUrl:'/images/property2.png',
 
     images: [
       '/images/toronto.png',
@@ -600,7 +600,7 @@ imageUrl:'/images/property6.png',
   {
     id: '24',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property7.png',
+imageUrl:'/images/property5.png',
 
     images: [
       '/images/toronto.png',
@@ -625,7 +625,7 @@ imageUrl:'/images/property7.png',
   {
     id: '25',
     //videoUrl: '/videos/showings-1.mp4',
-imageUrl:'/images/property7.png',
+imageUrl:'/images/modern house.png',
 
     images: [
       '/images/toronto.png',

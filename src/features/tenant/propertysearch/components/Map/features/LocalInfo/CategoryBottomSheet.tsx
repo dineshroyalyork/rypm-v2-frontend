@@ -206,32 +206,26 @@ const CategoryItemCard: React.FC<{
 
   return (
     <div
-      className="flex items-start p-1 hover:shadow-md hover:border-[#20364D]/20 transition-all duration-200 cursor-pointer active:scale-[0.98]"
-      onClick={handleCardClick}
-      style={{ touchAction: "manipulation" }} // Prevent drag on cards
-    >
-      {/* Thumbnail */}
-      <div className="w-13 h-13 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
-        <FallbackImage
-          src={item.thumbnail}
-          alt={item.title}
-          className="w-full h-full object-cover"
-          category={category}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 ml-3 min-w-0">
-        <h3 className="text-sm font-semibold text-[#FFF] truncate mb-1">
-          {item.title}
-        </h3>
-        <p className="text-xs text-[#E5E7EB] line-clamp-2 mb-1">
-          {item.address}
-        </p>
-      </div>
-
-      {/* Rating */}
-      <div className="flex items-center ml-2 flex-shrink-0">
+  className="flex items-center p-1 hover:shadow-md hover:border-[#20364D]/20 transition-all duration-200 cursor-pointer active:scale-[0.98]"
+  onClick={handleCardClick}
+  style={{ touchAction: "manipulation" }} 
+>
+  {/* Thumbnail */}
+  <div className="w-13 h-13 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
+    <FallbackImage
+      src={item.thumbnail}
+      alt={item.title}
+      className="w-full h-full object-cover"
+      category={category}
+    />
+  </div>
+  
+  <div className="flex-1 ml-3 min-w-0">
+    <div className="flex items-center justify-between mb-1">
+      <h3 className="text-sm font-semibold text-[#FFF] truncate flex-1 mr-2">
+        {item.title}
+      </h3>
+      <div className="flex items-center flex-shrink-0">
         <span className="mr-1">
           <RatingIcon />
         </span>
@@ -240,6 +234,13 @@ const CategoryItemCard: React.FC<{
         </span>
       </div>
     </div>
+    
+    <p className="text-xs text-[#E5E7EB] line-clamp-2 mb-1">
+      {item.address}
+    </p>
+  </div>
+</div>
+
   );
 };
 

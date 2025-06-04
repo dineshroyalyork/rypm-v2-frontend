@@ -48,7 +48,7 @@ const PropertySearchContent: React.FC = () => {
               onMapToggle={handleMapToggle} // ✅ Now updates URL
             />
           </div>
-          <div className="pt-20">
+          <div className="pt-18">
             <PropertyCarousel />
           </div>
           <BottomNavigation />
