@@ -976,12 +976,12 @@ const handleDrawClick = () => {
       {mapLoaded && (
         <>
           {/* Location Button */}
-          <div className="absolute bottom-13 right-4 z-10">
+          <div className="fixed bottom-13 right-4 z-10">
             <LocationButton map={map.current} />
           </div>
 
           {/* Bottom Center Controls */}
-          <div className="absolute bottom-13 left-0 right-0 z-9 flex justify-center">
+          <div className="fixed bottom-13 left-0 right-0 z-9 flex justify-center" >
             <div className="flex items-center gap-4" ref={dropdownRef}>
               <LocalInfoButton
                 isActive={isLocalInfoActive}
