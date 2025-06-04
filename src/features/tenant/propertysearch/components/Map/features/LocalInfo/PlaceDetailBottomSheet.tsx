@@ -164,7 +164,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                   <h3 className="text-sm font-semibold text-[#FFF] truncate mb-1">
                     {place.name}
                   </h3>
-                  <p className="text-xs text-[#E5E7EB] line-clamp-2 mb-1">
+                  <p className="text-xs text-[#E5E7EB] truncate mb-1">
                     {place.address}
                   </p>
                   {/* Contact Number */}
