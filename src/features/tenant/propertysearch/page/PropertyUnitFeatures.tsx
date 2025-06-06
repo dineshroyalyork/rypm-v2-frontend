@@ -385,21 +385,20 @@ import { unitFeaturesData } from "../hooks/useUnitFeatureData";
 interface PropertyDetailsProps {
   id: string;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PropertyUnitFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-// router.push(`/tenant/properties/${id}`);Add commentMore actions
+    // router.push(`/tenant/properties/${id}`);
     router.back();
-    };
+  };
 
   return (
     <>
-      <div className="py-5.5 px-4">
         {/* Header */}
-        <header className="flex flex-row items-center gap-[93px] mb-6.5 mt-4">
-          <div onClick={handleBackClick}>
+        <header className="flex flex-row items-center gap-[85px] mb-6.5 mt-4 mx-4 h-20 bg-white fixed top-[-20] left-0 right-0 ">
+          <div onClick={handleBackClick}> 
             <BackIcon />
           </div>
           <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px] capitalize">
@@ -408,7 +407,7 @@ const PropertyUnitFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
         </header>
 
         {/* main content unit features */}
-        <div>
+        <div className="pb-5.5 mt-22 px-4"> 
           {unitFeaturesData.map((section, sectionIndex) => (
             <section key={`section-${sectionIndex}`}>
               <div>
@@ -441,7 +440,6 @@ const PropertyUnitFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
                 />
               </div>
 
-              {/* Render subsections if they exist */}
               {section.subsections?.map((subsection, subIndex) => (
                 <div key={`subsection-${sectionIndex}-${subIndex}`}>
                   <Heading text={subsection.title} className="text-[12px]" />
@@ -474,14 +472,12 @@ const PropertyUnitFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
                 </div>
               ))}
 
-              {/* Add divider between sections (except after the last section) */}
               {sectionIndex < unitFeaturesData.length - 1 && (
                 <div className="w-[361px] h-[1.03px] bg-[#F6F7F8]"></div>
               )}
             </section>
           ))}
         </div>
-      </div>
     </>
   );
 };

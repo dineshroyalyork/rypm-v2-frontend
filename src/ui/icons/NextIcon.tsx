@@ -1,6 +1,6 @@
 import React from "react";
 
-interface BackIconProps {
+interface NextIconProps {
   width?: number;
   height?: number;
   className?: string;
@@ -10,7 +10,7 @@ interface BackIconProps {
   showBackground?: boolean;
 }
 
-const BackIcon = ({
+const NextIcon = ({
   width = 30,
   height = 30,
   className = "",
@@ -18,7 +18,7 @@ const BackIcon = ({
   opacity = 0.3,
   backgroundColor = "#F6F7F8",
   showBackground = true,
-}: BackIconProps) => {
+}: NextIconProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ const BackIcon = ({
             <div
               style={{
                 backdropFilter: "blur(2px)",
-                clipPath: "url(#bgblur_0_2599_3433_clip_path)",
+                clipPath: "url(#bgblur_prev_clip_path)",
                 height: "100%",
                 width: "100%",
               }}
@@ -51,13 +51,13 @@ const BackIcon = ({
         </>
       )}
       <path
-        d="M17.1669 8.96913C16.7227 8.52494 16.0051 8.52494 15.5609 8.96913L10.3331 14.1969C9.88895 14.6411 9.88895 15.3587 10.3331 15.8028L15.5609 21.0306C16.0051 21.4748 16.7227 21.4748 17.1669 21.0306C17.611 20.5864 17.611 19.8689 17.1669 19.4247L12.7477 14.9942L17.1669 10.5751C17.611 10.1309 17.5997 9.40193 17.1669 8.96913Z"
+        d="M12.8331 8.96913C13.2773 8.52494 13.9949 8.52494 14.4391 8.96913L19.6669 14.1969C20.1111 14.6411 20.1111 15.3587 19.6669 15.8028L14.4391 21.0306C13.9949 21.4748 13.2773 21.4748 12.8331 21.0306C12.389 20.5864 12.389 19.8689 12.8331 19.4247L17.2523 14.9942L12.8331 10.5751C12.389 10.1309 12.4003 9.40193 12.8331 8.96913Z"
         fill={color}
       />
       {showBackground && (
         <defs>
           <clipPath
-            id="bgblur_0_2599_3433_clip_path"
+            id="bgblur_prev_clip_path"
             transform="translate(4 4)"
           >
             <rect width="30" height="30" rx="15" />
@@ -68,4 +68,4 @@ const BackIcon = ({
   );
 };
 
-export default BackIcon;
+export default NextIcon;

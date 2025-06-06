@@ -7,10 +7,6 @@ export interface ImageItem {
     id: string;
 }
 
-
-
-
-// Export the data structure
 export const PhotoVideoData: ImageItem[] = [
     {
         id: "#exterior",

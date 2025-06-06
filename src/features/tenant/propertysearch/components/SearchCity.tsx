@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useId } from "react";
-import { MiceIcon } from "@/ui/icons";
+import { MiceIcon, ListIcon } from "@/ui/icons";
 import SearchIcon from "@mui/icons-material/Search";
 import { Tooltip, Box } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,6 @@ import {
   RippleEffect,
   MicIconContainer,
 } from "../styles/components/searchCityStyles";
-import { ListIcon } from "lucide-react";
 
 interface SearchCityProps {
   onChange?: (value: string) => void;
@@ -42,7 +41,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
   onSearch,
   placeholder = "Search",
   value = "",
-  width = "61vw",
+  width = "58vw",
   insideModal = false,
   isMapView = false,
   onSearchSheetOpen,
@@ -203,7 +202,7 @@ const SearchCity: React.FC<SearchCityProps> = ({
         InputProps={{
           startAdornment: (
             <SearchIconWrapper position="start">
-              <SearchIcon />
+              <SearchIcon className="w-4 h-4"/>
             </SearchIconWrapper>
           ),
           endAdornment: (
@@ -235,7 +234,9 @@ const SearchCity: React.FC<SearchCityProps> = ({
                     className="map-toggle-btn"
                   >
                     {!isMapView ? <StyledPlaceIcon /> : <ListIcon />}
-                    <MapButtonText variant="body2">
+                    <MapButtonText variant="body2" sx={{
+    paddingLeft: isMapView ? '4px' : '0px',
+  }}>
                       {!isMapView ? "Map" : "List"}
                     </MapButtonText>
                   </MapActionButton>
@@ -328,7 +329,9 @@ const SearchCity: React.FC<SearchCityProps> = ({
                   >
                     {!isMapView ? <StyledPlaceIcon /> : <ListIcon />}
 
-                    <MapButtonText variant="body2">
+                   <MapButtonText variant="body2" sx={{
+    paddingLeft: isMapView ? '4px' : '0px',
+  }}>
                       {!isMapView ? "Map" : "List"}
                     </MapButtonText>
                   </MapActionButton>

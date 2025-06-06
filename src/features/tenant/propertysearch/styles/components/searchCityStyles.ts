@@ -5,17 +5,14 @@ import PlaceIcon from '@mui/icons-material/Place';
 
 export const StyledTextField = styled(TextField)(({ width }: { width?: string }) => ({
   width: width || '70vw',
-  height: '40px',
+  height: '48px',
   '& .MuiOutlinedInput-root': {
-    height: '40px',
+    height: '48px',
     borderRadius: '9999px',
     backgroundColor: '#FFF',
     padding: '9px 10px',
-    '&:hover .MuiOutlinedInput-notchedOutline': {
-      border: '1.5px solid #F3F4F6', // override hover border
-    },
     '& .MuiOutlinedInput-notchedOutline': {
-      border: "1.5px solid #F3F4F6",
+      border: "1.5px solid #D1D5DC",
     },
     '& .MuiInputAdornment-root.MuiInputAdornment-positionEnd': {
       marginRight: '-5px',
@@ -23,7 +20,7 @@ export const StyledTextField = styled(TextField)(({ width }: { width?: string })
   },
   '& input::placeholder': {
     color: '#99A1AF',
-    fontSize: 'clamp(12px, 3.5vw, 14px)',
+    fontSize: 'clamp(14px, 3.5vw, 16px)',
     fontWeight: 400,
     lineHeight: '12px',
   },
@@ -31,8 +28,8 @@ export const StyledTextField = styled(TextField)(({ width }: { width?: string })
 
 export const SearchIconWrapper = styled(InputAdornment)({
   '& .MuiSvgIcon-root': {
-    color: '#a7bbce',
-    fontSize: '15px',
+    color: '#99A1AF',
+    fontSize: '16px',
     marginRight: '2px',
   },
   '&.MuiInputAdornment-root': {
@@ -41,22 +38,19 @@ export const SearchIconWrapper = styled(InputAdornment)({
   }
 });
 
-// New styled component for mic icon wrapper
 export const MicIconWrapper = styled('div')({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: '21px',
+  width: '11px',
   height: '15px',
-  marginRight: '8px',
+  marginRight: '12px',
   cursor: 'pointer',
   transition: 'all 0.2s ease',
-  // Ensure it doesn't affect the input width
   flexShrink: 0,
 });
 
-// Styled component for the ripple effect
 export const RippleEffect = styled('div')<{ isActive: boolean; color: string }>(({ isActive, color }) => ({
   position: 'absolute',
   top: '50%',
@@ -103,11 +97,9 @@ export const SearchButtonAdornment = styled(InputAdornment)({
 });
 
 export const MapButtonAdornment = styled(InputAdornment)({
-  backgroundColor: '#F6F7F8',
-  borderRadius: '24px',
   display: 'flex',
   justifyContent: 'end',
-  paddingRight: '6px',
+  paddingRight: '2px',
   width: 'auto',
   marginLeft: 'auto',
   marginRight: '2px',
@@ -123,12 +115,20 @@ export const SearchActionButton = styled(IconButton)({
 
 export const MapActionButton = styled(IconButton)({
   color: '#001D3D',
+  backgroundColor: '#F6F7F8',
   width: '60px',
-  height: '32px',
-  padding: '2px 8px',
+  height: '40px',
   display: 'flex',
+  flexDirection: 'row',
   alignItems: 'center',
-  gap:'4px',
+  justifyContent: 'flex-start', 
+  borderRadius: '24px',
+  border: "1.5px solid #D1D5DC",
+  padding: '4px',
+  paddingLeft: '6px',
+  '&:focus': {
+    backgroundColor: '#F6F7F8', // Keep same background on focus
+  },
 });
 
 export const SearchButtonText = styled(Typography)({
@@ -147,12 +147,9 @@ export const StyledPlaceIcon = styled(PlaceIcon)({
 
 export const MapButtonText = styled(Typography)({
   color: '#001D3D',
-  fontSize: '14px',
+  fontSize: '12px', // Reduced from 14px to fit better
   fontStyle: 'normal',
   fontWeight: 400,
-  display: 'flex',
-  width: '28px',
-  height: '18px',
-  flexDirection: 'column',
-  justifyContent: 'center',
+  textAlign: 'center', // Center the text
+  lineHeight: '1', // Tighter line height
 });

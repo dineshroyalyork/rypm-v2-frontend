@@ -12,7 +12,7 @@ import {
   BedroomsDenIcon,
   BathroomFillIcon,
   ParkingIcon,
-  MiceIcon,
+  // MiceIcon,
   HousesColorDistributionIcon,
   BasementCorolDistributionIcon,
   CondosColorDistributionIcon,
@@ -40,8 +40,8 @@ import {
 import { usePropertyData } from "../hooks/usePropertyData";
 import {
   ActionButtonsContainer,
-  AmenitiesContainer,
-  AmenityItem,
+  // AmenitiesContainer,
+  // AmenityItem,
   BackButton,
   CountText,
   MediaContainer,
@@ -112,9 +112,9 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
   };
 
   const handleBackClick = () => {
-// router.push(`/tenant/PropertySearch`);Add commentMore actions
+    // router.push(`/tenant/PropertySearch`);
     router.back();
-    };
+  };
 
   const handleShareClick = () => {
   };
@@ -182,8 +182,8 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           />
 
           <BackButton>
-            <div onClick={handleBackClick}>
-              <BackIcon height={30} width={30} color={"#FFF"} />
+            <div onClick={handleBackClick} color="">
+              <BackIcon height={30} width={30} backgroundColor="#001D3D" color="#FFF"/>
             </div>
           </BackButton>
           <ActionButtonsContainer>
@@ -422,7 +422,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           {/* Whats Near by */}
           <div className="mt-6">
             <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
-              What's Nearby
+              {`What's Nearby`}
             </h1>
               <WhatsNearByButtonContainer/>
             {/* map */}
@@ -437,8 +437,8 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           </div>
 
           {/* Know the place */}
-          <div className="mt-6">
-            <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
+          <div className="mt-6 text-[#001D3D]">
+            <h1 className=" text-[18px] font-bold leading-[18px]">
               Know The Place
             </h1>
             <div className="mt-5">
@@ -455,12 +455,12 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
                   storage—perfect for everyday living and entertaining.
                 </p>
                 <p className="text-[14px]">
-                  At the front of the unit, you'll find two spacious,
+                  {`At the front of the unit, you'll find two spacious,
                   light-filled bedrooms. The primary suite features a luxurious
                   en-suite bathroom complete with a double vanity. Additional
                   conveniences include an in-unit washer and dryer, with options
                   for a private roof terrace—ideal for relaxing or hosting
-                  guests.
+                  guests.`}
                 </p>
                 <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(180deg,_rgba(255,255,255,0)_-41.89%,_#fff_100%)] h-16"></div>
               </div>
@@ -516,11 +516,11 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             </div>
             <div className="flex flex-col p-2.5 items-start gap-2 w-[361px] rounded-[16px] bg-[#F8F9FB]">
               <h2 className="text-[#3A9A76] text-[14px] font-bold capitalize">
-                Day's <span className="lowercase">on Market</span>
+                {`Day's`} <span className="lowercase">on Market</span>
               </h2>
               <p className="text-[#001D3D] text-[12px] leading-[16px] capitalize">
-                about the day's on market. Lorem ipsum dolor sit amet
-                consectetur. Neque nullam risus lectus{" "}
+                {`about the day's on market. Lorem ipsum dolor sit amet
+                consectetur. Neque nullam risus lectus` }
               </p>
             </div>
 
@@ -591,7 +591,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           </div>
         </div>
 
-        <footer className="h-20  fixed bottom-0 left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
+        <footer className="h-20  fixed bottom-[-1] left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
           <div className=" flex flex-row gap-2 items-center">
             <div className="relative h-[40px] w-[40px] rounded-[50px] border-[1.5px] border-[#FFF]">
               <Image

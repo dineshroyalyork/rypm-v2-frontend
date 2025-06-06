@@ -418,20 +418,20 @@ import { buildingFeaturesData } from "../hooks/useBulidingFeatureData";
 interface PropertyDetailsProps {
   id: string;
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PropertyBuildingFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
   const router = useRouter();
 
   const handleBackClick = () => {
-// router.push(`/tenant/properties/${id}`);Add commentMore actions
+    // router.push(`/tenant/properties/${id}`);
     router.back();
-    };
+  };
 
   return (
     <>
-      <div className="py-5.5 px-4 bg-[#FFF]">
+      <div >
         {/* Header */}
-        <header className="flex flex-row items-center gap-[93px] mb-6.5 mt-4">
+        <header className="flex flex-row items-center gap-[80px] mb-6.5 mt-4 mx-4 h-20 bg-white fixed top-[-20] left-0 right-0 ">
           <div onClick={handleBackClick}>
             <BackIcon />
           </div>
@@ -441,7 +441,7 @@ const PropertyBuildingFeatures: React.FC<PropertyDetailsProps> = ({ id }) => {
         </header>
 
         {/* main content building features */}
-        <div>
+        <div className="pb-5.5 px-4 mt-22">
           {buildingFeaturesData.map((section, sectionIndex) => (
             <React.Fragment key={`section-${sectionIndex}`}>
               <section>

@@ -2,8 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
-import { MiceIcon, LocationIcon, BackIcon } from '@/ui/icons';
+import { MiceIcon, BackIcon } from '@/ui/icons';
 
 interface SearchSheetProps {
   isOpen: boolean;
@@ -110,8 +109,8 @@ const SearchSheet: React.FC<SearchSheetProps> = ({
                   onChange={handleSearchChange}
                   onKeyPress={handleKeyPress}
                   placeholder="Search here"
-                  className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-500 text-sm"
-                  style={{ touchAction: 'manipulation' }}
+                  className="flex-1 bg-transparent outline-none text-gray-800 placeholder-gray-500"
+                  style={{ touchAction: 'manipulation', fontSize: '16px', lineHeight: '1.2'}}
                 />
 
                 {/* Mic Icon */}

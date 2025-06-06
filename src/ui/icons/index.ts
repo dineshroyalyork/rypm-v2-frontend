@@ -153,3 +153,5 @@ export {default as HeartFillIcon} from './HeartFillIcon';
 export {default as RentalPreferencePeopleIcon} from './RentalPreferencePeopleIcon';
 export {default as ListIcon} from './ListIcon';
 export { default as ProfileIcon } from './ProfileIcon';
+export {default as DropDownIcon} from './DropDownIcon';
+export { default as NextIcon } from './NextIcon';

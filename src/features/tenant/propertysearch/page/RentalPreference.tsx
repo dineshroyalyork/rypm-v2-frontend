@@ -4,13 +4,14 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Heading from "../components/Heading";
 import { BackIcon, RentalPreferencePeopleIcon } from "@/ui/icons";
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import CustomCalendar from "@/ui/CustomCalendar";
+import CustomSelect from "@/ui/CustomSelect";
 
 const RentalPreference: React.FC = () => {
   const router = useRouter();
 
-  // State
   const [price, setPrice] = React.useState<number[]>([1500, 8000]);
   const [bedroom, setBedroom] = React.useState<string | null>(null);
   const [bathroom, setBathroom] = React.useState<string | null>(null);
@@ -53,9 +54,10 @@ const RentalPreference: React.FC = () => {
         key={opt}
         onClick={() => onSelect(opt)}
         className={`cursor-pointer text-xs text-center flex items-center justify-center transition-all duration-200
-          ${selected === opt 
-            ? "text-[#001D3D] border-[1.5px] border-[#001D3D]" 
-            : "text-[#001D3D] border border-transparent"
+          ${
+            selected === opt
+              ? "text-[#001D3D] border-[1.5px] border-[#001D3D]"
+              : "text-[#001D3D] border border-transparent"
           }
         `}
         style={{
@@ -93,9 +95,13 @@ const RentalPreference: React.FC = () => {
               <div className="flex flex-row items-center justify-between">
                 <Heading text="Price" className="text-sm" />
                 <div className="flex justify-between items-center gap-2">
-                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F1FCFF] rounded-md">{`${price[0]}`}</span>
+                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F3F4F6] rounded-md bg-white">
+                    $ {price[0].toLocaleString()}
+                  </span>
                   <span className="text-[#001D3D] text-xs">to</span>
-                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F1FCFF] rounded-md">{`${price[1]}`}</span>
+                  <span className="text-[#001D3D] text-xs p-1.5 border border-[#F3F4F6] rounded-md bg-white">
+                    $ {price[1].toLocaleString()}
+                  </span>
                 </div>
               </div>
               <Box sx={{ px: 1 }}>
@@ -116,7 +122,11 @@ const RentalPreference: React.FC = () => {
               <Heading text="Bedrooms" className="text-sm" />
               <div className="border border-[#F3F4F6] rounded-md px-2">
                 <div className="flex justify-between items-center gap-1">
-                  {renderOptions(["Studio+", "1+", "2+", "3+", "4+", "5+"], bedroom, setBedroom)}
+                  {renderOptions(
+                    ["Studio+", "1+", "2+", "3+", "4+", "5+"],
+                    bedroom,
+                    setBedroom
+                  )}
                 </div>
               </div>
             </div>
@@ -126,7 +136,11 @@ const RentalPreference: React.FC = () => {
               <Heading text="Bathrooms" className="text-sm" />
               <div className="border border-[#F3F4F6] rounded-md px-2">
                 <div className="flex justify-between items-center gap-1">
-                  {renderOptions(["All+", "1+", "2+", "3+", "4+", "5+"], bathroom, setBathroom)}
+                  {renderOptions(
+                    ["All+", "1+", "2+", "3+", "4+", "5+"],
+                    bathroom,
+                    setBathroom
+                  )}
                 </div>
               </div>
             </div>
@@ -136,7 +150,11 @@ const RentalPreference: React.FC = () => {
               <Heading text="Parking" className="text-sm" />
               <div className="border border-[#F3F4F6] rounded-md px-2">
                 <div className="flex justify-between items-center gap-1">
-                  {renderOptions(["All+", "1+", "2+", "3+", "4+", "5+"], parking, setParking)}
+                  {renderOptions(
+                    ["All+", "1+", "2+", "3+", "4+", "5+"],
+                    parking,
+                    setParking
+                  )}
                 </div>
               </div>
             </div>
@@ -144,27 +162,29 @@ const RentalPreference: React.FC = () => {
             {/* Move in date */}
             <div className="flex flex-row justify-between items-center">
               <Heading text="Move-In date" className="text-sm" />
-              <input
-                type="date"
-                className="py-1.5 px-2 rounded-md border border-[#F3F4F6] text-sm text-[#001D3D] w-[47.83vw]"
+              <CustomCalendar
                 value={moveInDate}
-                onChange={(e) => setMoveInDate(e.target.value)}
+                onChange={setMoveInDate}
+                placeholder="dd/mm/yyyy"
+                className="w-[35.83vw]"
               />
             </div>
 
             {/* Property type */}
             <div className="flex flex-row justify-between items-center">
               <Heading text="Property type" className="text-sm" />
-              <select
+              <CustomSelect
                 value={propertyType}
-                onChange={(e) => setPropertyType(e.target.value)}
-                className="py-1.5 px-2 rounded-md border border-[#F3F4F6] text-sm text-[#001D3D] capitalize w-[47.83vw]"
-              >
-                <option value="">Select</option>
-                <option value="apartment">Apartment</option>
-                <option value="condo">Condo</option>
-                <option value="house">House</option>
-              </select>
+                onChange={setPropertyType}
+                options={[
+                  { value: "alltypes", label: "All Types" },
+                  { value: "condominiums", label: "Condominiums" },
+                  { value: "house", label: "House" },
+                  { value: "multiplex", label: "Multiplex" },
+                ]}
+                placeholder="Select"
+                className="w-[35.83vw]"
+              />
             </div>
           </div>
         </div>
@@ -178,7 +198,9 @@ const RentalPreference: React.FC = () => {
             </div>
             <div className="flex flex-col gap-1 text-[#001D3D]">
               <p className="font-bold text-xs">Stay on top of your rentals!</p>
-              <p className="text-xs">Click here to track applications, move-ins, and more!</p>
+              <p className="text-xs">
+                Click here to track applications, move-ins, and more!
+              </p>
             </div>
           </div>
 

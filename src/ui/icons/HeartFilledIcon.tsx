@@ -8,8 +8,8 @@ interface HeartFilledIconProps {
 }
 
 const HeartFilledIcon = ({
-  width = 30,
-  height = 30,
+  width = 40,
+  height = 40,
   className = "",
   color = "#001D3D",
 }: HeartFilledIconProps) => {

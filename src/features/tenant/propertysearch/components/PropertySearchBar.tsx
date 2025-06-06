@@ -55,7 +55,7 @@ const PropertySearchBar: React.FC<PropertySearchBarProps> = ({
           sx={{ padding: "1px" }}
           onClick={handleNavigateRentalPreference}
         >
-          <FilterIcon width={30} height={30} color="#001D3D" />
+          <FilterIcon width={40} height={40} color="#001D3D" />
         </IconButton>
         <IconButton aria-label="Favorites" sx={{ padding: "1px" }}>
           <HeartFilledIcon  />

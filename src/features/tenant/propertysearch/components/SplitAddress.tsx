@@ -14,15 +14,14 @@ const SplitAddress = ({ fullAddress='' }: AddressProps) => {
     const restOfAddress = parts[1].trim();
 
     return (
-      <div className="text-[#1e3a59] text-[18px] font-bold leading-[1.4] tracking-tight capitalize whitespace-pre-line">
+      <div className="text-[#001D3D] text-[18px] font-bold leading-[1.4] tracking-tight capitalize whitespace-pre-line">
         {`${streetAddress}\n${restOfAddress}`}
       </div>
     );
   }
 
-  // Fallback if the address doesn't have the expected format
   return (
-    <div className="text-[#1e3a59] text-[18px] font-bold leading-[1.4] tracking-tight capitalize">
+    <div className="text-[#001D3D] text-[18px] font-bold leading-[1.4] tracking-tight capitalize">
       {fullAddress}
     </div>
   );
