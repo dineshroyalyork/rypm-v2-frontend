@@ -23,7 +23,7 @@ import PlacePopup from "./components/PlacePopup";
 import ClusterMarker from "./components/ClusterMarker";
 import CategoryBottomSheet from "./features/LocalInfo/CategoryBottomSheet";
 import PlaceDetailBottomSheet from "./features/LocalInfo/PlaceDetailBottomSheet";
-import SearchSheet from './features/SearchSheet';
+import SearchSheet from "./features/SearchSheet";
 import PropertySearchBar from "../PropertySearchBar";
 
 const MAPBOX_ACCESS_TOKEN =
@@ -48,7 +48,7 @@ interface PropertyCluster {
 const MapView: React.FC<MapViewProps> = ({
   initialLocation = { lat: 43.6532, lng: -79.3832 },
   zoom = 13,
-  onViewToggle
+  onViewToggle,
 }) => {
   const router = useRouter();
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -78,7 +78,7 @@ const MapView: React.FC<MapViewProps> = ({
 
   // ✅ Add the missing state variables
   const [showSearchSheet, setShowSearchSheet] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     isLocalInfoActive,
@@ -794,29 +794,29 @@ const MapView: React.FC<MapViewProps> = ({
   const handleMapClick = () => {
     setActiveMode("map");
     if (isLocalInfoActive) {
-    toggleLocalInfo();
-  }
+      toggleLocalInfo();
+    }
     if (drawState.isDrawMode || drawState.isDrawing) {
       cancelDrawing();
     }
   };
 
-const handleDrawClick = () => {
-  if (activeMode === "draw") {
-    setActiveMode("map");
-    cancelDrawing();
-  } else {
-    setActiveMode("draw");
-    
-    // ✅ Deactivate local info when activating draw
-    if (isLocalInfoActive) {
-      toggleLocalInfo();
+  const handleDrawClick = () => {
+    if (activeMode === "draw") {
+      setActiveMode("map");
+      cancelDrawing();
+    } else {
+      setActiveMode("draw");
+
+      // ✅ Deactivate local info when activating draw
+      if (isLocalInfoActive) {
+        toggleLocalInfo();
+      }
+
+      toggleDrawMode();
     }
-    
-    toggleDrawMode();
-  }
-  setShowStyleOptions(false);
-};
+    setShowStyleOptions(false);
+  };
 
   // Bottom sheet handlers
   const handleCategoryTabClick = (category: any) => {
@@ -858,6 +858,24 @@ const handleDrawClick = () => {
     setShowPlaceDetailSheet(false);
     setSelectedPlaceForDetails(null);
     // Keep the category bottom sheet open
+  };
+
+  const handlePlaceDetailFromPopup = async (placeId: string) => {
+    setShowPlacePopup(false);
+    setSelectedPlace(null);
+
+    setPlaceDetailsLoading(true);
+    setShowPlaceDetailSheet(true);
+
+    try {
+      const placeDetails = await getPlaceDetails(placeId);
+      setSelectedPlaceForDetails(placeDetails);
+    } catch (error) {
+      console.error("Error fetching place details:", error);
+      setSelectedPlaceForDetails(null);
+    } finally {
+      setPlaceDetailsLoading(false);
+    }
   };
 
   const handleSearchSheetOpen = () => {
@@ -1056,7 +1074,11 @@ const handleDrawClick = () => {
       {showPlacePopup && selectedPlace && (
         <div className="fixed inset-0 z-50 pointer-events-none flex items-end justify-center pb-3">
           <div className="w-[94vw] max-w-[420px] h-[177px] bg-white rounded-2xl shadow-xl pointer-events-auto">
-            <PlacePopup place={selectedPlace} onClose={handlePlacePopupClose} />
+            <PlacePopup
+              place={selectedPlace}
+              onClose={handlePlacePopupClose}
+              onViewDetails={handlePlaceDetailFromPopup} // 👈 Add this prop
+            />
           </div>
         </div>
       )}
@@ -1069,6 +1091,7 @@ const handleDrawClick = () => {
         items={convertPlacesToCategoryItems(places)}
         onPlaceDetailRequest={handlePlaceDetailRequest}
         initialHeight={0.35}
+        minTopDistance={220}
       />
 
       {/* Place Detail Bottom Sheet */}
@@ -1079,10 +1102,10 @@ const handleDrawClick = () => {
         place={selectedPlaceForDetails}
         loading={placeDetailsLoading}
         category={selectedCategory}
+        minTopDistance={220}
       />
 
-
-       <SearchSheet
+      <SearchSheet
         isOpen={showSearchSheet}
         onClose={handleSearchSheetClose}
         onSearch={handleSearch}
@@ -1096,9 +1119,9 @@ const handleDrawClick = () => {
         onSearchChange={setSearchQuery}
         isMapView={true}
         onMapToggle={onViewToggle}
-        onSearchSheetOpen={handleSearchSheetOpen} 
+        onSearchSheetOpen={handleSearchSheetOpen}
       />
-      
+
       {/* Custom Styles */}
       <style>{`
         @keyframes slideUp {

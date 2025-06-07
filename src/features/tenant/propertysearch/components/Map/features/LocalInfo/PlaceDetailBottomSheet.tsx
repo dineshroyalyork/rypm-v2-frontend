@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { GooglePlace, PlaceReview } from "../../hooks/useGooglePlaces";
-import { ArrowLeft, ExternalLink } from "lucide-react";
 import { RatingIcon } from "@/ui/icons";
 import { FallbackImage } from "../../utils/imageFallbacks";
 import CloseIcon from "@/ui/icons/CloseIcon";
@@ -13,22 +12,53 @@ interface PlaceDetailBottomSheetProps {
   place: GooglePlace | null;
   loading: boolean;
   category?: string;
+  minTopDistance?: number;
+  maxSheetHeight?: number;
 }
 
 const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
   isOpen,
   onClose,
-  onBack,
   place,
   loading,
   category = "place",
+  minTopDistance = 220,
+  maxSheetHeight = 600,
 }) => {
   const [dragY, setDragY] = useState(0);
   const constraintsRef = useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
-  const sheetHeight = screenHeight * 0.85;
+
+  const calculateSheetHeight = () => {
+    const originalHeight = screenHeight * 0.85;
+    const restrictedByTop = screenHeight - minTopDistance;
+    return Math.min(originalHeight, restrictedByTop, maxSheetHeight);
+  };
+
+  const sheetHeight = calculateSheetHeight();
+
+  const getSafeBottomPadding = () => {
+    if (typeof window === "undefined") return 80;
+
+    const screenHeight = window.innerHeight;
+    const originalMaxHeight = screenHeight * 0.85;
+    const actualMaxHeight = sheetHeight;
+
+    if (actualMaxHeight < originalMaxHeight) {
+      const heightDifference = originalMaxHeight - actualMaxHeight;
+      const calculatedPadding = Math.max(80, heightDifference * 0.4 + 60);
+      return Math.min(calculatedPadding, 120);
+    }
+
+    return 80; 
+  };
+
+  const bottomPadding = getSafeBottomPadding();
+
+  const maxDragDistance = Math.min(sheetHeight * 0.1, 20);
+
   const snapThreshold = sheetHeight * 0.3;
 
   const handleDragEnd = (event: any, info: PanInfo) => {
@@ -73,8 +103,11 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
         exit={{ y: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
         drag="y"
-        dragConstraints={{ top: -sheetHeight * 0.2, bottom: sheetHeight }}
-        dragElastic={0.1}
+        dragConstraints={{
+          top: -maxDragDistance,
+          bottom: sheetHeight,
+        }}
+        dragElastic={0.02}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
         className="fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]"
@@ -88,24 +121,27 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
           <div className="w-12 h-1 bg-gray-300 rounded-full" />
         </div>
 
-        {/* Header - Updated layout without back button */}
         <div
-          className="flex items-center justify-between px-4 flex-shrink-0"
+          className="grid grid-cols-[1fr_auto_1fr] items-center px-4 flex-shrink-0"
           style={{ touchAction: "none" }}
         >
+          <div></div>
+
           {/* Centered category title */}
-          <h2 className="text-md font-bold text-[#FFF] capitalize flex-1 text-center">
+          <h2 className="text-md font-bold text-[#FFF] capitalize whitespace-nowrap">
             {category}
           </h2>
 
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-            style={{ touchAction: "manipulation" }}
-          >
-            <CloseIcon width={16} height={16} />
-          </button>
+          {/* Close Button in right column */}
+          <div className="flex justify-end">
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              style={{ touchAction: "manipulation" }}
+            >
+              <CloseIcon width={16} height={16} />
+            </button>
+          </div>
         </div>
 
         {/* Content */}
@@ -146,8 +182,6 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
           ) : place ? (
             <div className="space-y-2">
               {" "}
-              {/* ✅ Reduced spacing from space-y-4 to space-y-2 */}
-              {/* Upper Section - Same design as category item card */}
               <div className="flex items-start p-1">
                 {/* Thumbnail */}
                 <div className="w-14 h-15 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
@@ -193,6 +227,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                   </p>
                 </div>
               )}
+              {/* Website */}
               {place.website && (
                 <div className="px-1">
                   <a
@@ -215,14 +250,14 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
               <div className="px-10 py-2">
                 <hr className="border-white border-t-1 my-2" />
               </div>
-              {/* Reviews */}
-              {place.reviews && place.reviews.length > 0 && (
-                <div className="px-1">
-                  {" "}
-                  {/* ✅ Reduced spacing by removing space-y-3 wrapper */}
+              {place.reviews && place.reviews.length > 0 ? (
+                <div
+                  className="px-1"
+                  style={{
+                    paddingBottom: `${Math.min(bottomPadding, 100)}px`, // 👈 Cap at 100px for reviews
+                  }}
+                >
                   <h3 className="text-md font-semibold text-[#FFF] text-center mb-3">
-                    {" "}
-                    {/* ✅ Added mb-3 for spacing */}
                     Reviews
                   </h3>
                   <div className="space-y-3">
@@ -231,9 +266,13 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                     ))}
                   </div>
                 </div>
+              ) : (
+                <div
+                  style={{
+                    paddingBottom: `${bottomPadding}px`, // 👈 Full padding when no reviews
+                  }}
+                />
               )}
-              {/* Bottom padding for better scrolling */}
-              <div className="h-4" />
             </div>
           ) : (
             <div className="flex items-center justify-center h-64">
@@ -249,7 +288,6 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
   );
 };
 
-// Review Card Component - Updated colors
 const ReviewCard: React.FC<{ review: PlaceReview }> = ({ review }) => {
   return (
     <div className="bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.2)] rounded-lg p-4 space-y-2">
