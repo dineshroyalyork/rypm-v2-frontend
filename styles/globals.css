@@ -86,3 +86,16 @@ body {
   scrollbar-width: none;     /* Firefox */
 }
 
+
+/* iOS Safari bottom bar safe area fix */
+.ios-safe-bottom {
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Additional fallback for older iOS versions */
+@supports (padding-bottom: constant(safe-area-inset-bottom)) {
+  .ios-safe-bottom {
+    padding-bottom: calc(20px + constant(safe-area-inset-bottom));
+  }
+}
+

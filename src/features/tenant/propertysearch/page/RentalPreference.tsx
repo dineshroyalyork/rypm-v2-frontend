@@ -13,11 +13,11 @@ const RentalPreference: React.FC = () => {
   const router = useRouter();
 
   const [price, setPrice] = React.useState<number[]>([1500, 8000]);
-  const [bedroom, setBedroom] = React.useState<string | null>(null);
-  const [bathroom, setBathroom] = React.useState<string | null>(null);
-  const [parking, setParking] = React.useState<string | null>(null);
+  const [bedroom, setBedroom] = React.useState<string | null>("Studio+");
+  const [bathroom, setBathroom] = React.useState<string | null>("All+");
+  const [parking, setParking] = React.useState<string | null>("All+");
   const [moveInDate, setMoveInDate] = React.useState<string>("");
-  const [propertyType, setPropertyType] = React.useState<string>("");
+  const [propertyType, setPropertyType] = React.useState<string>("alltypes");
 
   const handleBackClick = () => {
     router.back();
@@ -33,15 +33,18 @@ const RentalPreference: React.FC = () => {
       moveInDate,
       propertyType,
     };
+
+    console.log("Applied filters:", filters);
+    router.back();
   };
 
   const handleClear = () => {
     setPrice([1500, 8000]);
-    setBedroom(null);
-    setBathroom(null);
-    setParking(null);
+    setBedroom("Studio+");
+    setBathroom("All+"); 
+    setParking("All+"); 
     setMoveInDate("");
-    setPropertyType("");
+    setPropertyType("alltypes"); 
   };
 
   const renderOptions = (
@@ -61,13 +64,14 @@ const RentalPreference: React.FC = () => {
           }
         `}
         style={{
-          width: '11vw', 
-          height: '9vw', 
-          borderRadius: '4px',
-          minWidth: '43px', 
-          minHeight: '35px',
-          maxWidth: '60px', 
-          maxHeight: '45px', 
+          width: opt === "Studio+" ? "13vw" : "11vw",
+          height: "9vw",
+          borderRadius: "4px",
+          minWidth: opt === "Studio+" ? "50px" : "43px",
+          minHeight: "35px",
+          maxHeight: "45px",
+          maxWidth: opt === "Studio+" ? "70px" : "60px",
+          padding: opt === "Studio+" ? "0 4px" : "0 2px",
         }}
       >
         {opt}
@@ -89,7 +93,7 @@ const RentalPreference: React.FC = () => {
           </header>
 
           {/* Scrollable Content Area - Add bottom padding to prevent overlap */}
-          <div className="flex-1 space-y-3 overflow-y-auto pb-40">
+          <div className="flex-1 space-y-3 overflow-y-auto pb-56">
             {/* Price Range */}
             <div className="space-y-1">
               <div className="flex flex-row items-center justify-between">
@@ -113,6 +117,20 @@ const RentalPreference: React.FC = () => {
                   min={1000}
                   max={10000}
                   size="small"
+                  sx={{
+                    "& .MuiSlider-thumb": {
+                      border: "2px solid #D1D5DC",
+                      "&:hover": {
+                        border: "2px solid #D1D5DC",
+                      },
+                      "&.Mui-focusVisible": {
+                        border: "2px solid #D1D5DC",
+                      },
+                      "&.Mui-active": {
+                        border: "2px solid #D1D5DC",
+                      },
+                    },
+                  }}
                 />
               </Box>
             </div>
@@ -182,7 +200,7 @@ const RentalPreference: React.FC = () => {
                   { value: "house", label: "House" },
                   { value: "multiplex", label: "Multiplex" },
                 ]}
-                placeholder="Select"
+                placeholder="All Types" 
                 className="w-[35.83vw]"
               />
             </div>
@@ -190,40 +208,40 @@ const RentalPreference: React.FC = () => {
         </div>
 
         {/* Fixed Bottom Section - Info Banner + Buttons */}
-        <div className="absolute bottom-5 left-0 right-0 px-4 space-y-3 bg-white">
-          {/* Info Banner */}
-          <div className="py-2 px-3 rounded-xl bg-[#F1FCFF] flex flex-row items-center gap-3">
-            <div className="flex-shrink-0">
-              <RentalPreferencePeopleIcon />
-            </div>
-            <div className="flex flex-col gap-1 text-[#001D3D]">
-              <p className="font-bold text-xs">Stay on top of your rentals!</p>
-              <p className="text-xs">
-                Click here to track applications, move-ins, and more!
-              </p>
-            </div>
+       <div className="absolute bottom-0 left-0 right-0 px-4 space-y-3 bg-white ios-safe-bottom"> {/* 👈 Added ios-safe-bottom class */}
+        {/* Info Banner */}
+        <div className="py-2 px-3 rounded-xl bg-[#F1FCFF] flex flex-row items-center gap-3 mt-3"> {/* 👈 Added mt-3 */}
+          <div className="flex-shrink-0">
+            <RentalPreferencePeopleIcon />
           </div>
-
-          {/* Footer: Buttons */}
-          <div className="flex flex-row justify-between gap-3">
-            <button
-              type="button"
-              onClick={handleClear}
-              className="flex-1 py-2.5 rounded-xl text-sm font-bold capitalize text-[#001D3D] border border-[#001D3D]"
-            >
-              Clear All
-            </button>
-            <button
-              type="submit"
-              className="flex-1 py-2.5 rounded-xl text-sm font-bold capitalize text-[#FFF] bg-[#001D3D]"
-            >
-              Apply
-            </button>
+          <div className="flex flex-col gap-1 text-[#001D3D]">
+            <p className="font-bold text-xs">Stay on top of your rentals!</p>
+            <p className="text-xs">
+              Click here to track applications, move-ins, and more!
+            </p>
           </div>
         </div>
-      </form>
-    </div>
-  );
+
+        {/* Footer: Buttons */}
+        <div className="flex flex-row justify-between gap-3 pb-2"> {/* 👈 Added pb-2 */}
+          <button
+            type="button"
+            onClick={handleClear}
+            className="flex-1 py-2.5 rounded-xl text-sm font-bold capitalize text-[#001D3D] border border-[#001D3D]"
+          >
+            Clear All
+          </button>
+          <button
+            type="submit"
+            className="flex-1 py-2.5 rounded-xl text-sm font-bold capitalize text-[#FFF] bg-[#001D3D]"
+          >
+            Apply
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+);
 };
 
 export default RentalPreference;
