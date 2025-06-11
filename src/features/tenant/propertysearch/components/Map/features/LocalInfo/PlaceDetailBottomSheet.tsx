@@ -14,6 +14,10 @@ interface PlaceDetailBottomSheetProps {
   category?: string;
   minTopDistance?: number;
   maxSheetHeight?: number;
+  backgroundColor?: "white" | "dark";
+  textColor?: "light" | "dark";
+  isContained?: boolean;
+  isLocalInfoMap?: boolean;
 }
 
 const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
@@ -24,12 +28,30 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
   category = "place",
   minTopDistance = 220,
   maxSheetHeight = 600,
+  backgroundColor = "dark",
+  textColor = "light",
+  isLocalInfoMap = false,
 }) => {
   const [dragY, setDragY] = useState(0);
   const constraintsRef = useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
+  const dragElasticity = isLocalInfoMap ? 0.01 : 0.02;
+
+  const bgClass =
+    backgroundColor === "white"
+      ? "bg-white"
+      : "bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]";
+
+  const titleTextClass =
+    textColor === "dark" ? "text-[#001D3D]" : "text-[#FFF]";
+
+  const contentTextClass =
+    textColor === "dark" ? "text-[#001D3D]" : "text-[#FFF]";
+
+  const subTextClass =
+    textColor === "dark" ? "text-[#6B7280]" : "text-[#E5E7EB]";
 
   const calculateSheetHeight = () => {
     const originalHeight = screenHeight * 0.85;
@@ -52,12 +74,14 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
       return Math.min(calculatedPadding, 120);
     }
 
-    return 80; 
+    return 80;
   };
 
   const bottomPadding = getSafeBottomPadding();
 
-  const maxDragDistance = Math.min(sheetHeight * 0.1, 20);
+  const maxDragDistance = isLocalInfoMap
+    ? 5 // Very restrictive for LocalInfoMap
+    : Math.min(sheetHeight * 0.1, 20);
 
   const snapThreshold = sheetHeight * 0.3;
 
@@ -86,16 +110,17 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
 
   return (
     <>
-      {/* Backdrop */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black z-40"
-        onClick={onClose}
-      />
+      {/* Backdrop - only show for dark theme */}
+      {backgroundColor === "dark" && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black z-40"
+          onClick={onClose}
+        />
+      )}
 
-      {/* Bottom Sheet */}
       <motion.div
         ref={constraintsRef}
         initial={{ y: "100%" }}
@@ -107,10 +132,10 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
           top: -maxDragDistance,
           bottom: sheetHeight,
         }}
-        dragElastic={0.02}
+        dragElastic={dragElasticity}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
-        className="fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]"
+        className={`fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col ${bgClass}`}
         style={{ height: `${sheetHeight}px` }}
       >
         {/* Drag Handle */}
@@ -128,7 +153,9 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
           <div></div>
 
           {/* Centered category title */}
-          <h2 className="text-md font-bold text-[#FFF] capitalize whitespace-nowrap">
+          <h2
+            className={`text-md font-bold ${titleTextClass} capitalize whitespace-nowrap`}
+          >
             {category}
           </h2>
 
@@ -139,7 +166,11 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
               className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               style={{ touchAction: "manipulation" }}
             >
-              <CloseIcon width={16} height={16} />
+              <CloseIcon
+                width={16}
+                height={16}
+                color={textColor === "dark" ? "#99A1AF" : "#FFF"}
+              />
             </button>
           </div>
         </div>
@@ -157,7 +188,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
                 <svg
-                  className="animate-spin h-8 w-8 text-[#FFF] mx-auto mb-4"
+                  className={`animate-spin h-8 w-8 ${contentTextClass} mx-auto mb-4`}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -176,7 +207,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                <p className="text-[#E5E7EB]">Loading place details...</p>
+                <p className={subTextClass}>Loading place details...</p>
               </div>
             </div>
           ) : place ? (
@@ -195,15 +226,17 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
 
                 {/* Content */}
                 <div className="flex-1 ml-3 min-w-0">
-                  <h3 className="text-sm font-semibold text-[#FFF] truncate mb-1">
+                  <h3
+                    className={`text-sm font-semibold ${contentTextClass} truncate mb-1`}
+                  >
                     {place.name}
                   </h3>
-                  <p className="text-xs text-[#E5E7EB] truncate mb-1">
+                  <p className={`text-xs ${subTextClass} truncate mb-1`}>
                     {place.address}
                   </p>
                   {/* Contact Number */}
                   {place.phoneNumber && (
-                    <p className="text-xs text-[#E5E7EB] mb-1">
+                    <p className={`text-xs ${subTextClass} mb-1`}>
                       {place.phoneNumber}
                     </p>
                   )}
@@ -214,7 +247,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                   <span className="mr-1">
                     <RatingIcon />
                   </span>
-                  <span className="text-sm font-medium text-[#FFF]">
+                  <span className={`text-sm font-medium ${contentTextClass}`}>
                     {place.rating ? place.rating.toFixed(1) : "4.2"}
                   </span>
                 </div>
@@ -222,7 +255,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
               {/* Description */}
               {place.description && (
                 <div className="px-1">
-                  <p className="text-[#E5E7EB] text-sm leading-relaxed">
+                  <p className={`${subTextClass} text-sm leading-relaxed`}>
                     {place.description}
                   </p>
                 </div>
@@ -234,7 +267,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                     href={place.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#FFF] font-medium"
+                    className={`${contentTextClass} font-medium`}
                   >
                     www.
                     {
@@ -248,7 +281,11 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
               )}
               {/* Divider */}
               <div className="px-10 py-2">
-                <hr className="border-white border-t-1 my-2" />
+                <hr
+                  className={`${
+                    textColor === "dark" ? "border-gray-300" : "border-white"
+                  } border-t-1 my-2`}
+                />
               </div>
               {place.reviews && place.reviews.length > 0 ? (
                 <div
@@ -257,12 +294,20 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
                     paddingBottom: `${Math.min(bottomPadding, 100)}px`, // 👈 Cap at 100px for reviews
                   }}
                 >
-                  <h3 className="text-md font-semibold text-[#FFF] text-center mb-3">
+                  <h3
+                    className={`text-md font-semibold ${contentTextClass} text-center mb-3`}
+                  >
                     Reviews
                   </h3>
                   <div className="space-y-3">
                     {place.reviews.slice(0, 3).map((review, index) => (
-                      <ReviewCard key={index} review={review} />
+                      <ReviewCard
+                        key={index}
+                        review={review}
+                        textColor={textColor}
+                        contentTextClass={contentTextClass}
+                        subTextClass={subTextClass}
+                      />
                     ))}
                   </div>
                 </div>
@@ -278,7 +323,7 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
             <div className="flex items-center justify-center h-64">
               <div className="text-center">
                 <div className="text-4xl mb-2">😕</div>
-                <p className="text-[#E5E7EB]">Place details not available</p>
+                <p className={subTextClass}>Place details not available</p>
               </div>
             </div>
           )}
@@ -288,9 +333,19 @@ const PlaceDetailBottomSheet: React.FC<PlaceDetailBottomSheetProps> = ({
   );
 };
 
-const ReviewCard: React.FC<{ review: PlaceReview }> = ({ review }) => {
+const ReviewCard: React.FC<{
+  review: PlaceReview;
+  textColor: "light" | "dark";
+  contentTextClass: string;
+  subTextClass: string;
+}> = ({ review, textColor, contentTextClass, subTextClass }) => {
+  const cardBgClass =
+    textColor === "dark"
+      ? "bg-[rgba(0,29,61,0.05)] border border-[rgba(0,29,61,0.1)]"
+      : "bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.2)]";
+
   return (
-    <div className="bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.2)] rounded-lg p-4 space-y-2">
+    <div className={`${cardBgClass} rounded-lg p-4 space-y-2`}>
       <div className="flex items-center gap-3">
         {review.profile_photo_url && (
           <img
@@ -301,13 +356,13 @@ const ReviewCard: React.FC<{ review: PlaceReview }> = ({ review }) => {
         )}
         <div className="flex-1">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-[#FFF] text-sm">
+            <span className={`font-medium ${contentTextClass} text-sm`}>
               {review.author_name}
             </span>
           </div>
         </div>
       </div>
-      <p className="text-sm text-[#E5E7EB] leading-relaxed">{review.text}</p>
+      <p className={`text-sm ${subTextClass} leading-relaxed`}>{review.text}</p>
     </div>
   );
 };

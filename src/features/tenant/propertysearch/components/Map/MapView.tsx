@@ -1091,7 +1091,7 @@ const MapView: React.FC<MapViewProps> = ({
         items={convertPlacesToCategoryItems(places)}
         onPlaceDetailRequest={handlePlaceDetailRequest}
         initialHeight={0.35}
-        minTopDistance={220}
+        minTopDistance={240}
       />
 
       {/* Place Detail Bottom Sheet */}
@@ -1102,7 +1102,7 @@ const MapView: React.FC<MapViewProps> = ({
         place={selectedPlaceForDetails}
         loading={placeDetailsLoading}
         category={selectedCategory}
-        minTopDistance={220}
+        minTopDistance={240}
       />
 
       <SearchSheet

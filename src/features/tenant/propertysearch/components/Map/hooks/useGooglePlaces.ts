@@ -58,7 +58,7 @@ export function useGooglePlaces() {
     async (
       category: LocalInfoCategory,
       center: { lat: number; lng: number },
-      radius: number = 2000
+      radius: number = 200
     ) => {
       const apiKey =
         process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY ||

@@ -21,7 +21,11 @@ interface CategoryBottomSheetProps {
   onItemClick?: (item: CategoryItem) => void;
   onPlaceDetailRequest?: (placeId: string) => Promise<void>;
   initialHeight?: number;
-  minTopDistance?: number; // 👈 Add this prop
+  minTopDistance?: number;
+  backgroundColor?: "white" | "dark";
+  textColor?: "light" | "dark";
+  isContained?: boolean;
+  isLocalInfoMap?: boolean;
 }
 
 const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
@@ -32,41 +36,66 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
   onItemClick,
   onPlaceDetailRequest,
   initialHeight = 0.25,
-  minTopDistance = 220, 
+  minTopDistance = 220,
+  backgroundColor = "dark",
+  textColor = "light",
+  isContained = false,
+  isLocalInfoMap = false,
 }) => {
   const [dragY, setDragY] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const constraintsRef = useRef(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const screenHeight = typeof window !== "undefined" ? window.innerHeight : 800;
-  const minHeight = screenHeight * initialHeight;
-  const maxHeight = screenHeight * 0.8;
+  // ✅ Use containerHeight consistently throughout
+  const containerHeight = isContained
+    ? 670
+    : typeof window !== "undefined"
+    ? window.innerHeight
+    : 800;
+  const minHeight = containerHeight * initialHeight;
+  const maxHeight = containerHeight * 0.8;
   const currentHeight = isExpanded ? maxHeight : minHeight;
+  const dragElasticity = isLocalInfoMap ? 0.01 : 0.05;
+
+  // Dynamic styles based on props
+  const bgClass =
+    backgroundColor === "white"
+      ? "bg-white"
+      : "bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]";
+
+  const titleTextClass =
+    textColor === "dark" ? "text-[#001D3D]" : "text-[#FFF]";
+
+  const itemTitleClass =
+    textColor === "dark" ? "text-[#001D3D]" : "text-[#FFF]";
+
+  const itemAddressClass =
+    textColor === "dark" ? "text-[#6B7280]" : "text-[#E5E7EB]";
 
   const getSafeBottomPadding = () => {
     if (typeof window === "undefined") return 80;
 
-    const screenHeight = window.innerHeight;
-    const originalMaxHeight = screenHeight * 0.8;
-    const restrictedMaxHeight = screenHeight - minTopDistance;
+    const originalMaxHeight = containerHeight * 0.8;
+    const restrictedMaxHeight = containerHeight - minTopDistance;
 
     if (restrictedMaxHeight < originalMaxHeight) {
       const heightDifference = originalMaxHeight - restrictedMaxHeight;
       const calculatedPadding = Math.max(80, heightDifference * 0.4 + 60);
-
       return Math.min(calculatedPadding, 150);
     }
 
-    return 80; 
+    return 80;
   };
 
   const bottomPadding = getSafeBottomPadding();
 
-  const maxDragDistance = Math.min(
-    currentHeight * 0.2, 
-    screenHeight - minTopDistance - currentHeight
-  );
+  const maxDragDistance = isLocalInfoMap
+    ? 5
+    : Math.min(
+        currentHeight * 0.2,
+        containerHeight - minTopDistance - currentHeight
+      );
 
   const snapThreshold = minHeight * 0.5;
 
@@ -93,10 +122,10 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
       const isScrollable =
         contentRef.current.scrollHeight > contentRef.current.clientHeight;
       if (isScrollable) {
-        return false; 
+        return false;
       }
     }
-    return true; 
+    return true;
   };
 
   useEffect(() => {
@@ -109,25 +138,26 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
 
   return (
     <>
-      {/* Backdrop */}
-      <motion.div/>
+      {!isContained && backgroundColor === "dark" && <motion.div />}
 
       {/* Bottom Sheet */}
       <motion.div
         ref={constraintsRef}
         initial={{ y: "100%" }}
-        animate={{ y: `${100 - (currentHeight / screenHeight) * 100}%` }}
+        animate={{ y: `${100 - (currentHeight / containerHeight) * 100}%` }} // ✅ Use containerHeight
         exit={{ y: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
         drag="y"
         dragConstraints={{
-          top: -maxDragDistance, 
-          bottom: screenHeight,
+          top: -maxDragDistance,
+          bottom: containerHeight,
         }}
-        dragElastic={0.05} 
+        dragElastic={dragElasticity}
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
-        className="fixed bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col bg-[rgba(23,61,59,0.5)] backdrop-blur-[5px]"
+        className={`${
+          isContained ? "absolute" : "fixed"
+        } bottom-0 left-0 right-0 rounded-t-3xl shadow-2xl z-50 overflow-hidden flex flex-col ${bgClass}`}
         style={{
           height: `${currentHeight}px`,
         }}
@@ -149,7 +179,9 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
           <div></div>
 
           {/* Centered category title */}
-          <h2 className="text-md font-bold text-[#FFF] capitalize whitespace-nowrap">
+          <h2
+            className={`text-md font-bold ${titleTextClass} capitalize whitespace-nowrap`}
+          >
             {category}
           </h2>
 
@@ -160,7 +192,11 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
               className="p-2 hover:bg-gray-100 rounded-full transition-colors"
               style={{ touchAction: "manipulation" }}
             >
-              <CloseIcon width={16} height={16} />
+              <CloseIcon
+                width={16}
+                height={16}
+                color={textColor === "dark" ? "#99A1AF" : "white"}
+              />
             </button>
           </div>
         </div>
@@ -171,14 +207,14 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
           className="flex-1 overflow-y-auto px-2 py-2"
           style={{
             touchAction: "pan-y",
-            overscrollBehavior: "contain", 
+            overscrollBehavior: "contain",
           }}
         >
           {items.length > 0 ? (
             <div
               className="space-y-3"
               style={{
-                paddingBottom: `${bottomPadding}px`, 
+                paddingBottom: `${bottomPadding}px`,
               }}
             >
               {items.map((item) => (
@@ -186,8 +222,11 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
                   key={item.id}
                   item={item}
                   category={category}
+                  textColor={textColor}
                   onItemClick={onItemClick}
                   onPlaceDetailRequest={onPlaceDetailRequest}
+                  itemTitleClass={itemTitleClass}
+                  itemAddressClass={itemAddressClass}
                 />
               ))}
             </div>
@@ -213,9 +252,20 @@ const CategoryBottomSheet: React.FC<CategoryBottomSheetProps> = ({
 const CategoryItemCard: React.FC<{
   item: CategoryItem;
   category: string;
+  textColor?: "dark" | "light";
   onItemClick?: (item: CategoryItem) => void;
   onPlaceDetailRequest?: (placeId: string) => Promise<void>;
-}> = ({ item, category, onItemClick, onPlaceDetailRequest }) => {
+  itemTitleClass: string;
+  itemAddressClass: string;
+}> = ({
+  item,
+  category,
+  onItemClick,
+  textColor = "light",
+  onPlaceDetailRequest,
+  itemTitleClass,
+  itemAddressClass,
+}) => {
   const handleCardClick = async () => {
     if (onItemClick) {
       onItemClick(item);
@@ -243,20 +293,22 @@ const CategoryItemCard: React.FC<{
 
       <div className="flex-1 ml-3 min-w-0">
         <div className="flex items-center justify-between mb-1">
-          <h3 className="text-sm font-semibold text-[#FFF] truncate flex-1 mr-2">
+          <h3
+            className={`text-sm font-semibold ${itemTitleClass} truncate flex-1 mr-2`}
+          >
             {item.title}
           </h3>
           <div className="flex items-center flex-shrink-0">
             <span className="mr-1">
-              <RatingIcon />
+              <RatingIcon color={textColor === "dark" ? "#99A1AF" : "#FFF"} />
             </span>
-            <span className="text-sm font-medium text-[#FFF]">
+            <span className={`text-sm font-medium ${itemTitleClass}`}>
               {item.rating > 0 ? item.rating.toFixed(1) : "4.2"}
             </span>
           </div>
         </div>
 
-        <p className="text-xs text-[#E5E7EB] line-clamp-2 mb-1">
+        <p className={`text-xs ${itemAddressClass} line-clamp-2 mb-1`}>
           {item.address}
         </p>
       </div>

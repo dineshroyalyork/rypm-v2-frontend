@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -12,7 +12,6 @@ import {
   BedroomsDenIcon,
   BathroomFillIcon,
   ParkingIcon,
-  // MiceIcon,
   HousesColorDistributionIcon,
   BasementCorolDistributionIcon,
   CondosColorDistributionIcon,
@@ -40,8 +39,6 @@ import {
 import { usePropertyData } from "../hooks/usePropertyData";
 import {
   ActionButtonsContainer,
-  // AmenitiesContainer,
-  // AmenityItem,
   BackButton,
   CountText,
   MediaContainer,
@@ -58,6 +55,8 @@ import SliderImage from "../components/SliderImage";
 import WhatsNearByButtonContainer from "../components/WhatsNearByButtonContainer";
 import SplitAddress from "../components/SplitAddress";
 
+import PropertyDetailsMap from "../components/Map/PropertyDetailsMap";
+import { LocalInfoCategory } from "../components/Map/features/LocalInfo/CategoryTabs";
 
 interface PropertyDetailsProps {
   id: string;
@@ -67,9 +66,9 @@ interface PropertyDetailsProps {
 const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
   const router = useRouter();
   const { property } = usePropertyData(id);
-  // const {property,isLoading,error} = usePropertyData(id);
   const { properties } = usePropertyData();
-
+  const [selectedNearbyCategory, setSelectedNearbyCategory] = useState<LocalInfoCategory>('education');
+  
 
   const handleNavigateUnitFeature = () => {
     if (onClick) {
@@ -95,13 +94,15 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
     }
   };
 
-  const handleNaviagtePropertyMapLocalInfo = () => {
-    if (onClick) {
-      onClick();
-    } else {
-      router.push(`/tenant/properties/${id}/map-local-info`);
-    }
-  };
+const handleNaviagtePropertyMapLocalInfo = () => {
+  if (onClick) {
+    onClick();
+  } else {
+    router.push(
+      `/tenant/properties/${id}/map-local-info?category=${selectedNearbyCategory}`
+    );
+  }
+};
 
   const handleNavigatePhotosAndVideos = () => {
     if (onClick) {
@@ -122,51 +123,6 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
   const handleFavoriteClick = () => {
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex flex-col w-full h-screen bg-white">
-  //       <div className="flex justify-between items-center p-4 bg-white border-b border-gray-200">
-  //         <button
-  //           onClick={handleBackClick}
-  //           className="p-2 rounded-full hover:bg-gray-100"
-  //         >
-  //           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-  //           </svg>
-  //         </button>
-  //         <h2 className="text-lg font-semibold">Loading...</h2>
-  //         <div className="w-6"></div> {/* Spacer */}
-  //       </div>
-  //       <div className="flex justify-center items-center flex-1">
-  //         <p>Loading property details...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  // if (error || !property) {
-  //   return (
-  //     <div className="flex flex-col w-full h-screen bg-white">
-  //       <div className="flex justify-between items-center p-4 bg-white border-b border-gray-200">
-  //         <button
-  //           onClick={handleBackClick}
-  //           className="p-2 rounded-full hover:bg-gray-100"
-  //         >
-  //           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-  //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-  //           </svg>
-  //         </button>
-  //         <h2 className="text-lg font-semibold">Error</h2>
-  //         <div className="w-6"></div> {/* Spacer */}
-  //       </div>
-  //       <div className="flex justify-center items-center flex-1">
-  //         <p className="text-red-500">
-  //           {error || 'Property not found'}
-  //         </p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <>
@@ -183,7 +139,12 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
 
           <BackButton>
             <div onClick={handleBackClick} color="">
-              <BackIcon height={30} width={30} backgroundColor="#001D3D" color="#FFF"/>
+              <BackIcon
+                height={30}
+                width={30}
+                backgroundColor="#001D3D"
+                color="#FFF"
+              />
             </div>
           </BackButton>
           <ActionButtonsContainer>
@@ -206,16 +167,18 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             </PhotoCountBox>
             <VideoCountBox>
               <VideoIcon width={14} height={14} className="mr-1 text-white" />
-              <CountText variant="body2">{property?.videoCount }</CountText>
+              <CountText variant="body2">{property?.videoCount}</CountText>
             </VideoCountBox>
           </MediaCountContainer>
         </MediaContainer>
-      
+
         <div></div>
         {/* First Details Content */}
         <div className="mt-6 px-4">
           {/* Price */}
-          <h1 className="text-[#001D3D] text-[20px] font-bold capitalize">{property?.price}/<span className="text-[14px]">Month</span></h1>
+          <h1 className="text-[#001D3D] text-[20px] font-bold capitalize">
+            {property?.price}/<span className="text-[14px]">Month</span>
+          </h1>
           {/* Address */}
           <div className=" mt-4 flex flex-row gap-1.5 items-start">
             <span className="mt-[7px]">
@@ -419,15 +382,33 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
             </div>
           </div>
 
-          {/* Whats Near by */}
           <div className="mt-6">
             <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px]">
               {`What's Nearby`}
             </h1>
-              <WhatsNearByButtonContainer/>
-            {/* map */}
-            <div>
-              <div>Map</div>
+
+            <WhatsNearByButtonContainer
+              selectedCategory={selectedNearbyCategory}
+              onCategoryChange={setSelectedNearbyCategory}
+            />
+
+            <div className="mt-4">
+              <PropertyDetailsMap
+                propertyCoordinates={
+                  property?.coordinates?.lat && property?.coordinates?.lng
+                    ? {
+                        lat: property.coordinates.lat,
+                        lng: property.coordinates.lng,
+                      }
+                    : { lat: 43.6532, lng: -79.3832 }
+                }
+                propertyAddress={property?.address || ""}
+                selectedCategory={selectedNearbyCategory}
+                onExpandMap={() => {
+                  router.push(`/tenant/properties/${id}/map-local-info`);
+                }}
+              />
+
               <div className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
                 <button onClick={handleNaviagtePropertyMapLocalInfo}>
                   View on map
@@ -591,7 +572,7 @@ const PropertyDetails: React.FC<PropertyDetailsProps> = ({ id, onClick }) => {
           </div>
         </div>
 
-        <footer className="h-20  fixed bottom-[-1] left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize">
+        <footer className="h-20  fixed bottom-[-1] left-0 right-0 rounded-t-[8px] bg-[rgba(32,54,77,0.5)] backdrop-blur-[5px] flex flex-row justify-evenly items-center font-[Helvetica] capitalize z-40">
           <div className=" flex flex-row gap-2 items-center">
             <div className="relative h-[40px] w-[40px] rounded-[50px] border-[1.5px] border-[#FFF]">
               <Image

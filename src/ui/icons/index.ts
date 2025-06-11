@@ -155,3 +155,5 @@ export {default as ListIcon} from './ListIcon';
 export { default as ProfileIcon } from './ProfileIcon';
 export {default as DropDownIcon} from './DropDownIcon';
 export { default as NextIcon } from './NextIcon';
+export {default as PropertyIcon} from './PropertyIcon';
+export {default as ExpandIcon} from './ExpandIcon';

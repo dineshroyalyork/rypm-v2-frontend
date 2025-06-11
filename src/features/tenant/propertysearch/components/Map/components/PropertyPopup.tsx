@@ -31,7 +31,7 @@ const PropertyPopup: React.FC<PropertyPopupProps> = ({
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-4 px-4">
       <div
-        className="relative rounded-xl overflow-hidden shadow-xl w-[92vw] max-w-[361px] h-[70vh] max-h-[282px] cursor-pointer"
+        className="relative rounded-xl overflow-hidden shadow-xl w-[92vw] max-w-[361px] h-[50vh] max-h-[252px] cursor-pointer"
         onClick={handlePopupClick}
       >
         {/* Top Action Buttons */}

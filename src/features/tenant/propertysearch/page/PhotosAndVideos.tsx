@@ -167,8 +167,8 @@ const PhotosAndVideos: React.FC<PhotoVideosProps> = ({ id }) => {
   return (
     <>
       {/* Header */}
-      <header className="flex flex-row items-center gap-[85px] mb-6.5 mt-4 mx-4 h-20 bg-white fixed top-[-20] left-0 right-0 z-1">
-        <div onClick={handleBackClick}>
+      <header className="flex flex-row items-center gap-[85px] mb-6.5 mt-4 h-21 bg-white fixed top-[-20] left-0 right-0 z-1">
+        <div className="mx-4" onClick={handleBackClick}>
           <BackIcon />
         </div>
         <h1 className="text-[#001D3D] text-[18px] font-bold leading-[18px] capitalize">
