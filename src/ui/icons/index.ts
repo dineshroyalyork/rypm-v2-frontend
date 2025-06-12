@@ -157,3 +157,6 @@ export {default as DropDownIcon} from './DropDownIcon';
 export { default as NextIcon } from './NextIcon';
 export {default as PropertyIcon} from './PropertyIcon';
 export {default as ExpandIcon} from './ExpandIcon';
+export {default as MoreIcon} from './MoreIcon'
+export {default as CreateIcon} from './CreateIcon'
+export {default as DeleteIcon} from './DeleteIcon'
