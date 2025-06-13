@@ -201,7 +201,7 @@ const WishlistGrid: React.FC = () => {
               onClick={handleModalClose}
               aria-label="Close"
             >
-              <CloseIcon width={10} height={10}/>
+              <CloseIcon width={10} height={10} />
             </button>
             {/* Heading */}
             <h2 className="w-full text-center text-lg font-semibold text-[#001D3D] mb-4">
@@ -211,7 +211,7 @@ const WishlistGrid: React.FC = () => {
             <input
               ref={inputRef}
               type="text"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4 text-[#001D3D] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#001D3D]"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4 text-[#001D3D] placeholder-gray-400 focus:outline-none focus:ring-0 focus:border-gray-300"
               placeholder="Wishlist name"
               value={wishlistName}
               onChange={(e) => {

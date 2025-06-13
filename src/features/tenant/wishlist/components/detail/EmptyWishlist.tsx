@@ -15,7 +15,7 @@ const EmptyWishlist: React.FC<EmptyWishlistProps> = ({ name }) => (
       Save properties to your<br />
       {name} wishlist
     </p>
-    <span className="text-[#001D3D] font-bold underline cursor-pointer">
+    <span className="text-[#001D3D] font-bold cursor-pointer">
       Add to wishlist
     </span>
   </div>
