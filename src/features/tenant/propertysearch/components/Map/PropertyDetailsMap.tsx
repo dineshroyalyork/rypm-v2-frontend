@@ -67,7 +67,7 @@ const PropertyDetailsMap: React.FC<PropertyDetailsMapProps> = memo(
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/streets-v11",
         center: [propertyCoordinates.lng, propertyCoordinates.lat],
-        zoom: 13,
+        zoom: 15,
         interactive: true,
       });
 
@@ -91,7 +91,7 @@ const PropertyDetailsMap: React.FC<PropertyDetailsMapProps> = memo(
   }
 
   const propertyMarkerElement = document.createElement("div");
-  propertyMarkerElement.style.zIndex = '9999';
+  propertyMarkerElement.style.zIndex = '20';
   const root = ReactDOM.createRoot(propertyMarkerElement);
   root.render(<PropertyIcon />);
 

@@ -393,29 +393,35 @@ const handleNaviagtePropertyMapLocalInfo = () => {
             />
 
             <div className="mt-4">
-              <PropertyDetailsMap
-                propertyCoordinates={
-                  property?.coordinates?.lat && property?.coordinates?.lng
-                    ? {
-                        lat: property.coordinates.lat,
-                        lng: property.coordinates.lng,
-                      }
-                    : { lat: 43.6532, lng: -79.3832 }
-                }
-                propertyAddress={property?.address || ""}
-                selectedCategory={selectedNearbyCategory}
-                onExpandMap={() => {
-                  router.push(`/tenant/properties/${id}/map-local-info`);
-                }}
-              />
+  <div className="relative">
+    <PropertyDetailsMap
+      propertyCoordinates={
+        property?.coordinates?.lat && property?.coordinates?.lng
+          ? {
+              lat: property.coordinates.lat,
+              lng: property.coordinates.lng,
+            }
+          : { lat: 43.6532, lng: -79.3832 }
+      }
+      propertyAddress={property?.address || ""}
+      selectedCategory={selectedNearbyCategory}
+      onExpandMap={() => {
+        router.push(`/tenant/properties/${id}/map-local-info`);
+      }}
+    />
+    
+    {/* Gradient fade overlay */}
+    <div className="absolute bottom-0 left-0 right-0 bg-[linear-gradient(180deg,_rgba(255,255,255,0)_-41.89%,_#fff_100%)] h-16 pointer-events-none z-40"></div>
+  </div>
+  
+  <div className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
+    <button onClick={handleNaviagtePropertyMapLocalInfo}>
+      View on map
+    </button>
+  </div>
+</div>
+</div>
 
-              <div className="text-[#001D3D] text-[14px] font-bold capitalize w-[100%] py-3.5 flex justify-center">
-                <button onClick={handleNaviagtePropertyMapLocalInfo}>
-                  View on map
-                </button>
-              </div>
-            </div>
-          </div>
 
           {/* Know the place */}
           <div className="mt-6 text-[#001D3D]">

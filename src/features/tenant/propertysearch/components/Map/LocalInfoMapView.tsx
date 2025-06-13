@@ -44,7 +44,7 @@ interface CategoryItem {
 
 const LocalInfoMapView: React.FC<LocalInfoMapViewProps> = ({
   initialLocation = { lat: 43.6532, lng: -79.3832 },
-  zoom = 15,
+  zoom = 17,
   initialCategory = "education",
   propertyData,
 }) => {
@@ -132,6 +132,7 @@ const LocalInfoMapView: React.FC<LocalInfoMapViewProps> = ({
     }
 
     const propertyMarkerElement = document.createElement("div");
+    propertyMarkerElement.style.zIndex = '20';
     const root = ReactDOM.createRoot(propertyMarkerElement);
     root.render(<PropertyIcon />);
 
