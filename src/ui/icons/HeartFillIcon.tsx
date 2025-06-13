@@ -18,8 +18,9 @@ const HeartFillIcon = ({
       height={height}
       viewBox="0 0 30 30"
       fill="none"
+      className={className}
     >
-      <foreignObject x="-4" y="-4" width="38" height="38">
+      {/* <foreignObject x="-4" y="-4" width="38" height="38">
         <div
           style={{
             backdropFilter: "blur(0.05px)",
@@ -28,7 +29,7 @@ const HeartFillIcon = ({
             width: "100%",
           }}
         ></div>
-      </foreignObject>
+      </foreignObject> */}
       <rect
         data-figma-bg-blur-radius="4"
         width="30"

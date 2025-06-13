@@ -1,5 +1,8 @@
+import React from 'react';
 import WishlistGrid from '@/features/tenant/wishlist/components/grid/WishlistGrid';
 
-export default function WishlistPage() {
+const WishlistPage: React.FC = () => {
   return <WishlistGrid />;
-}
+};
+
+export default WishlistPage;

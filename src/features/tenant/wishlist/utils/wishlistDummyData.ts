@@ -21,7 +21,7 @@ export const dummyProperties: Property[] = [
     dishwasher: true,
     refrigerator: true,
     microwave: true,
-    imageUrl: '/images/property5.png'
+    imageUrl: '/images/wishlist5.png'
   },
   {
     id: 'prop2',
@@ -43,7 +43,7 @@ export const dummyProperties: Property[] = [
     dishwasher: false,
     refrigerator: true,
     microwave: true,
-    imageUrl: '/images/property2.png'
+    imageUrl: '/images/wishlist6.jpg'
   },
   {
     id: 'prop3',
@@ -65,7 +65,7 @@ export const dummyProperties: Property[] = [
     dishwasher: true,
     refrigerator: true,
     microwave: true,
-    imageUrl: '/images/property3.png'
+    imageUrl: '/images/wishlist7.jpg'
   },
   {
     id: 'prop4',
@@ -87,35 +87,155 @@ export const dummyProperties: Property[] = [
     dishwasher: true,
     refrigerator: true,
     microwave: true,
-    imageUrl: '/images/property4.png'
+    imageUrl: '/images/wishlist8.jpg'
+  },
+  // 4 NEW PROPERTIES
+  {
+    id: 'prop5',
+    address: '321 Main St, Brampton, ON, L6T 3Y1, Canada',
+    bedCount: 3,
+    bathCount: 2,
+    price: '$2,800/month',
+    country: 'Canada',
+    city: 'Brampton',
+    areaSqft: 1100,
+    parking: 2,
+    furnished: true,
+    basement: true,
+    closets: true,
+    fireplace: false,
+    centralHVAC: true,
+    washerDryer: true,
+    airConditioning: true,
+    dishwasher: true,
+    refrigerator: true,
+    microwave: true,
+    imageUrl: '/images/wishlist9.jpg'
+  },
+  {
+    id: 'prop6',
+    address: '567 James St N, Hamilton, ON, L8L 1J9, Canada',
+    bedCount: 2,
+    bathCount: 1,
+    price: '$1,950/month',
+    country: 'Canada',
+    city: 'Hamilton',
+    areaSqft: 800,
+    parking: 1,
+    furnished: false,
+    basement: false,
+    closets: true,
+    fireplace: true,
+    centralHVAC: false,
+    washerDryer: false,
+    airConditioning: true,
+    dishwasher: false,
+    refrigerator: true,
+    microwave: true,
+    imageUrl: '/images/wishlist10.jpg'
+  },
+  {
+    id: 'prop7',
+    address: '890 Bank St, Ottawa, ON, K1S 3W4, Canada',
+    bedCount: 1,
+    bathCount: 1,
+    price: '$1,650/month',
+    country: 'Canada',
+    city: 'Ottawa',
+    areaSqft: 550,
+    parking: 0,
+    furnished: true,
+    basement: false,
+    closets: true,
+    fireplace: false,
+    centralHVAC: true,
+    washerDryer: true,
+    airConditioning: false,
+    dishwasher: true,
+    refrigerator: true,
+    microwave: true,
+    imageUrl: '/images/wishlist11.jpg'
+  },
+  {
+    id: 'prop8',
+    address: '234 Ouellette Ave, Windsor, ON, N9A 6J3, Canada',
+    bedCount: 4,
+    bathCount: 3,
+    price: '$2,400/month',
+    country: 'Canada',
+    city: 'Windsor',
+    areaSqft: 1350,
+    parking: 2,
+    furnished: false,
+    basement: true,
+    closets: true,
+    fireplace: true,
+    centralHVAC: true,
+    washerDryer: true,
+    airConditioning: true,
+    dishwasher: true,
+    refrigerator: true,
+    microwave: true,
+    imageUrl: '/images/wishlist12.jpg'
   }
 ];
 
 export const likedPropertiesData: LikedPropertiesData = {
-  properties: dummyProperties,
-  count: 20 
+  properties: dummyProperties.map((property, index) => ({
+    ...property,
+    imageUrl: `/images/liked${index + 1}.jpg`
+  })),
+  count: 20
 };
 
 export const dummyWishlists: Wishlist[] = [
   {
     id: 'wl1',
-    name: 'Dream Homes',
+    name: 'Toronto',
     properties: [dummyProperties[0], dummyProperties[1]],
     createdAt: '2024-01-15T10:00:00Z',
     updatedAt: '2024-01-15T10:00:00Z'
   },
   {
     id: 'wl2',
-    name: 'Downtown Apartments',
-    properties: [dummyProperties[2]],
+    name: 'Ontario',
+    properties: [ dummyProperties[1]],
     createdAt: '2024-01-12T15:30:00Z',
     updatedAt: '2024-01-12T15:30:00Z'
   },
   {
     id: 'wl3',
-    name: 'Budget Friendly',
-    properties: [dummyProperties[3], dummyProperties[1], dummyProperties[0]],
+    name: 'Mississauga',
+    properties: [dummyProperties[2], dummyProperties[1], dummyProperties[0]],
     createdAt: '2024-01-10T09:15:00Z',
     updatedAt: '2024-01-10T09:15:00Z'
+  },
+  {
+    id: 'wl4',
+    name: 'Brampton',
+    properties: [dummyProperties[3], dummyProperties[2]],
+    createdAt: '2024-01-08T14:20:00Z',
+    updatedAt: '2024-01-08T14:20:00Z'
+  },
+  {
+    id: 'wl5',
+    name: 'Hamilton',
+    properties: [dummyProperties[4]],
+    createdAt: '2024-01-05T11:45:00Z',
+    updatedAt: '2024-01-05T11:45:00Z'
+  },
+  {
+    id: 'wl6',
+    name: 'Ottawa',
+    properties: [dummyProperties[5], dummyProperties[3], dummyProperties[1]],
+    createdAt: '2024-01-03T16:30:00Z',
+    updatedAt: '2024-01-03T16:30:00Z'
+  },
+  {
+    id: 'wl7',
+    name: 'Windsor',
+    properties: [dummyProperties[6]],
+    createdAt: '2024-01-01T09:00:00Z',
+    updatedAt: '2024-01-01T09:00:00Z'
   }
 ];
